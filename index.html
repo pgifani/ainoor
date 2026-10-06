@@ -70,7 +70,7 @@ tailwind.config = { theme: { extend: {
     </div>
     <div class="flex items-center gap-2.5">
       <button id="langBtn" class="text-[.9rem] font-semibold text-ink-soft hover:text-ink px-2 py-1 rounded-lg" aria-label="Change language">English</button>
-      <a href="#request" class="btn btn-coral px-4 py-2 text-[.92rem]" data-i18n="nav_cta">درخواست مشاوره</a>
+      <a href="/intake" class="btn btn-coral px-4 py-2 text-[.92rem]" data-i18n="nav_cta">درخواست سرویس</a>
     </div>
   </nav>
 </header>
@@ -86,7 +86,7 @@ tailwind.config = { theme: { extend: {
       <h1 class="display text-4xl md:text-[3.3rem] leading-[1.15] mt-5" data-i18n="hero_title">مطب شما، آنلاین و هوشمند.</h1>
       <p class="text-white/85 text-lg leading-loose mt-5 max-w-[46ch]" data-i18n="hero_sub">وب‌سایت حرفه‌ای همراه با نوبت‌دهی آنلاین، پیامک خودکار، ویزیت آنلاین و دستیار هوش مصنوعی — آماده و راه‌اندازی‌شده در چند روز.</p>
       <div class="flex flex-wrap gap-3 mt-8">
-        <a href="#request" class="btn btn-coral px-6 py-3.5" data-i18n="hero_cta1">درخواست مشاورهٔ رایگان</a>
+        <a href="/intake" class="btn btn-coral px-6 py-3.5" data-i18n="hero_cta1">درخواست ساخت وب‌سایت</a>
         <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="btn btn-ghost px-6 py-3.5" data-i18n="hero_cta2">دیدن نمونهٔ زنده</a>
       </div>
       <div class="flex items-center gap-5 mt-8 text-white/75 text-sm">
@@ -218,7 +218,7 @@ tailwind.config = { theme: { extend: {
         <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p1_3">پیامک تأیید و لغو</span></li>
         <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p1_4">اطلاع نوبت در تلگرام/بله</span></li>
       </ul>
-      <button class="choose btn btn-light w-full mt-7 py-3" data-plan="basic" data-i18n="p_choose">انتخاب این پلن</button>
+      <a href="/intake" class="btn btn-light w-full mt-7 py-3" data-i18n="p_choose">درخواست این پلن</a>
     </div>
     <!-- Pro (popular) -->
     <div class="card-hover bg-ink text-white rounded-2xl p-7 shadow-lift relative scale-[1.02]">
@@ -233,7 +233,7 @@ tailwind.config = { theme: { extend: {
         <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p2_3">پیش‌پرداخت کارت‌به‌کارت</span></li>
         <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p2_4">لغو توسط بیمار + مدیریت روزهای تعطیل</span></li>
       </ul>
-      <button class="choose btn btn-coral w-full mt-7 py-3" data-plan="pro" data-i18n="p_choose2">انتخاب این پلن</button>
+      <a href="/intake" class="btn btn-coral w-full mt-7 py-3" data-i18n="p_choose2">درخواست این پلن</a>
     </div>
     <!-- Premium -->
     <div class="card-hover bg-white rounded-2xl p-7 shadow-card border border-black/5">
@@ -247,7 +247,7 @@ tailwind.config = { theme: { extend: {
         <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p3_3">طراحی و برندینگ اختصاصی</span></li>
         <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p3_4">پشتیبانی و اولویت ویژه</span></li>
       </ul>
-      <button class="choose btn btn-light w-full mt-7 py-3" data-plan="premium" data-i18n="p_choose3">انتخاب این پلن</button>
+      <a href="/intake" class="btn btn-light w-full mt-7 py-3" data-i18n="p_choose3">درخواست این پلن</a>
     </div>
   </div>
   <p class="text-center text-ink-soft text-sm mt-6" data-i18n="plans_note">مطمئن نیستید کدام پلن؟ فرم را پر کنید تا راهنمایی کنیم.</p>
@@ -327,7 +327,7 @@ tailwind.config = { theme: { extend: {
     <p class="text-sm text-center" data-i18n="foot_tag">وب‌سایت‌های هوشمند برای پزشکان</p>
     <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm">
       <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="hover:text-white" data-i18n="foot_demo">نمونهٔ زنده</a>
-      <a href="#request" class="hover:text-white" data-i18n="foot_cta">درخواست</a>
+      <a href="/intake" class="hover:text-white" data-i18n="foot_cta">فرم درخواست</a>
       <a href="https://wa.me/447356007709" target="_blank" rel="noopener" class="hover:text-white" data-i18n="foot_wa">واتس‌اپ</a>
       <a href="https://t.me/+447356007709" target="_blank" rel="noopener" class="hover:text-white" data-i18n="foot_tg">تلگرام</a>
     </div>
@@ -342,10 +342,10 @@ tailwind.config = { theme: { extend: {
 const EN = {
   meta_title:"Ainoor — Smart websites & booking for clinics",
   meta_desc:"Professional websites and smart booking for doctors: SMS, online visits, and an AI assistant.",
-  nav_features:"Features", nav_how:"How it works", nav_plans:"Plans", nav_faq:"FAQ", nav_cta:"Request a demo",
+  nav_features:"Features", nav_how:"How it works", nav_plans:"Plans", nav_faq:"FAQ", nav_cta:"Request service",
   hero_badge:"Built for doctors", hero_title:"Your clinic, online and intelligent.",
   hero_sub:"A professional website with online booking, automatic SMS, online visits, and an AI assistant — set up and live in days.",
-  hero_cta1:"Get a free consultation", hero_cta2:"See a live demo",
+  hero_cta1:"Request your website", hero_cta2:"See a live demo",
   hero_trust1:"No tech skills needed", hero_trust2:"On your own domain", hero_trust3:"Support in Persian",
   hero_float:"Confirmation SMS sent",
   trust1:"🌐 Bilingual (FA/EN)", trust2:"📱 Automatic SMS", trust3:"💻 Online visits", trust4:"🤖 AI assistant",
@@ -366,7 +366,7 @@ const EN = {
   p2_1:"Everything in Basic", p2_2:"Online visits (voice/text)", p2_3:"Card-to-card prepayment", p2_4:"Patient self-cancel + day-off management",
   p3_name:"Premium", p3_for:"+ AI & custom design", p3_price:"000,000", cur3:"Toman setup", p3_monthly:"+ 000,000 Toman / month",
   p3_1:"Everything in Pro", p3_2:"AI assistant (Claude)", p3_3:"Custom design & branding", p3_4:"Priority support",
-  p_popular:"Most popular", p_choose:"Choose this plan", p_choose2:"Choose this plan", p_choose3:"Choose this plan",
+  p_popular:"Most popular", p_choose:"Request this plan", p_choose2:"Request this plan", p_choose3:"Request this plan",
   plans_note:"Not sure which plan? Fill the form and we'll advise.",
   form_h:"Get a free consultation", form_sub:"Fill the form and we'll contact you within one business day. No commitment.",
   l_name:"Full name", l_clinic:"Specialty / clinic name", l_phone:"Mobile number", l_email:"Email", l_opt:"(optional)",
@@ -380,7 +380,7 @@ const EN = {
   q2:"Can I use my own domain?", a2:"Yes. The site is published on your own domain, and if you don't have one we'll get it for you.",
   q3:"How do SMS and online visits work?", a3:"SMS goes through an Iranian gateway and online visits run over WhatsApp. We arrange the details at setup.",
   q4:"Is patient data secure?", a4:"Yes. Data is kept on a private, dedicated server and the AI assistant never gives medical advice.",
-  foot_tag:"Smart websites for doctors", foot_demo:"Live demo", foot_cta:"Request", foot_wa:"WhatsApp", foot_tg:"Telegram", foot_copy:"© Ainoor — all rights reserved.",
+  foot_tag:"Smart websites for doctors", foot_demo:"Live demo", foot_cta:"Request form", foot_wa:"WhatsApp", foot_tg:"Telegram", foot_copy:"© Ainoor — all rights reserved.",
   // messages
   m_sending:"Sending…", m_ok:"Thank you! Your request was sent — we'll be in touch shortly.", m_err:"Name and a phone or valid email are required.", m_fail:"Couldn't send. Try again, or message us on WhatsApp.",
 };
