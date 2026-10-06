@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-i18n="meta_title">Ainoor — وب‌سایت و نوبت‌دهی هوشمند برای مطب</title>
+<meta name="description" data-i18n-attr="content" data-i18n="meta_desc" content="وب‌سایت حرفه‌ای و سیستم نوبت‌دهی هوشمند برای پزشکان؛ پیامک، ویزیت آنلاین و دستیار هوش مصنوعی.">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = { theme: { extend: {
+  colors: {
+    violet: { DEFAULT:'#6350E6', deep:'#3F31A6', soft:'#EEEBFC' },
+    coral:'#FF6F5E', mint:'#1FB9A0',
+    ink: { DEFAULT:'#191733', soft:'#5B5878' },
+    paper:'#FAF9FF',
+  },
+  fontFamily: { body:['Vazirmatn','Inter','sans-serif'], display:['Vazirmatn','Space Grotesk','sans-serif'] },
+  boxShadow: { card:'0 20px 50px -28px rgba(63,49,166,.35)', lift:'0 28px 60px -24px rgba(63,49,166,.45)' },
+}}}
+</script>
+<style>
+  :root{ color-scheme: light; }
+  html{ scroll-behavior:smooth; }
+  body{ background:var(--paper,#FAF9FF); color:#191733; }
+  html[lang="en"]{ font-family:'Inter',sans-serif; }
+  html[lang="en"] .display{ font-family:'Space Grotesk',sans-serif; letter-spacing:-.02em; }
+  html[lang="fa"], html[lang="fa"] .display{ font-family:'Vazirmatn',sans-serif; }
+  .display{ font-weight:800; }
+  .hero-bg{
+    background:
+      radial-gradient(60% 90% at 85% 0%, rgba(255,111,94,.28) 0%, transparent 55%),
+      radial-gradient(70% 90% at 0% 100%, rgba(31,185,160,.22) 0%, transparent 55%),
+      linear-gradient(135deg,#3F31A6 0%,#6350E6 100%);
+  }
+  .grain{ position:absolute; inset:0; opacity:.06; pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .chip{ transition:transform .15s, box-shadow .15s; }
+  .card-hover{ transition:transform .2s, box-shadow .2s; }
+  .card-hover:hover{ transform:translateY(-3px); box-shadow:var(--sh-lift,0 28px 60px -24px rgba(63,49,166,.45)); }
+  .field{ width:100%; background:#fff; border:1px solid rgba(25,23,51,.12); border-radius:14px; padding:12px 14px; font:inherit; color:#191733; outline:none; transition:border-color .15s, box-shadow .15s; }
+  .field::placeholder{ color:#9a98b0; }
+  .field:focus{ border-color:#6350E6; box-shadow:0 0 0 4px #EEEBFC; }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; font-weight:700; border-radius:13px; transition:transform .12s, box-shadow .15s, background .15s; }
+  .btn:active{ transform:translateY(1px); }
+  .btn-coral{ background:#FF6F5E; color:#fff; box-shadow:0 14px 30px -12px rgba(255,111,94,.6); }
+  .btn-coral:hover{ background:#f85a48; }
+  .btn-light{ background:#fff; color:#3F31A6; box-shadow:0 10px 26px -14px rgba(63,49,166,.4); }
+  .btn-ghost{ background:rgba(255,255,255,.12); color:#fff; border:1px solid rgba(255,255,255,.25); }
+  .btn-ghost:hover{ background:rgba(255,255,255,.2); }
+  :focus-visible{ outline:2px solid #FF6F5E; outline-offset:2px; border-radius:6px; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .card-hover{ transition:none; } }
+</style>
+</head>
+<body class="font-body antialiased">
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 backdrop-blur bg-paper/80 border-b border-black/5">
+  <nav class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
+    <a href="#top" class="flex items-center gap-2 font-display text-xl text-ink">
+      <span class="inline-grid place-items-center w-8 h-8 rounded-xl bg-violet text-white shadow-card">✦</span>
+      <span>ainoor</span>
+    </a>
+    <div class="hidden md:flex items-center gap-7 text-[.95rem] text-ink-soft">
+      <a href="#features" class="hover:text-ink" data-i18n="nav_features">امکانات</a>
+      <a href="#how" class="hover:text-ink" data-i18n="nav_how">روند کار</a>
+      <a href="#plans" class="hover:text-ink" data-i18n="nav_plans">پلن‌ها</a>
+      <a href="#faq" class="hover:text-ink" data-i18n="nav_faq">سؤال‌ها</a>
+    </div>
+    <div class="flex items-center gap-2.5">
+      <button id="langBtn" class="text-[.9rem] font-semibold text-ink-soft hover:text-ink px-2 py-1 rounded-lg" aria-label="Change language">English</button>
+      <a href="#request" class="btn btn-coral px-4 py-2 text-[.92rem]" data-i18n="nav_cta">درخواست مشاوره</a>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero-bg relative overflow-hidden text-white">
+  <div class="grain"></div>
+  <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <span class="inline-block text-[.8rem] font-semibold bg-white/12 border border-white/25 rounded-full px-3.5 py-1.5" data-i18n="hero_badge">ساخته‌شده برای پزشکان</span>
+      <h1 class="display text-4xl md:text-[3.3rem] leading-[1.15] mt-5" data-i18n="hero_title">مطب شما، آنلاین و هوشمند.</h1>
+      <p class="text-white/85 text-lg leading-loose mt-5 max-w-[46ch]" data-i18n="hero_sub">وب‌سایت حرفه‌ای همراه با نوبت‌دهی آنلاین، پیامک خودکار، ویزیت آنلاین و دستیار هوش مصنوعی — آماده و راه‌اندازی‌شده در چند روز.</p>
+      <div class="flex flex-wrap gap-3 mt-8">
+        <a href="#request" class="btn btn-coral px-6 py-3.5" data-i18n="hero_cta1">درخواست مشاورهٔ رایگان</a>
+        <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="btn btn-ghost px-6 py-3.5" data-i18n="hero_cta2">دیدن نمونهٔ زنده</a>
+      </div>
+      <div class="flex items-center gap-5 mt-8 text-white/75 text-sm">
+        <span data-i18n="hero_trust1">بدون دانش فنی</span><span class="opacity-40">•</span>
+        <span data-i18n="hero_trust2">روی دامنهٔ خودتان</span><span class="opacity-40">•</span>
+        <span data-i18n="hero_trust3">پشتیبانی فارسی</span>
+      </div>
+    </div>
+
+    <!-- product preview card -->
+    <div class="relative">
+      <div class="rounded-2xl bg-white shadow-lift overflow-hidden ring-1 ring-black/5">
+        <div class="flex items-center gap-1.5 px-4 py-3 bg-[#F2F0FB] border-b border-black/5">
+          <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></span>
+          <span class="mx-auto text-[.7rem] text-ink-soft tracking-wide">demo.ainoor.io</span>
+        </div>
+        <div class="p-5" dir="rtl" style="background:linear-gradient(180deg,#FDFDFF,#F0EFF9)">
+          <div class="text-ink font-display text-lg">دکتر فروغ هاشمی</div>
+          <div class="text-ink-soft text-xs mb-3" style="color:#6B6885">متخصص کودکان و نوزادان</div>
+          <div class="grid grid-cols-4 gap-1.5 mb-3">
+            <div class="chip text-center text-[.62rem] py-1.5 rounded-lg" style="background:#EBE9FB;color:#5244B8">شنبه</div>
+            <div class="chip text-center text-[.62rem] py-1.5 rounded-lg text-white" style="background:#6C5CE7">یکشنبه</div>
+            <div class="chip text-center text-[.62rem] py-1.5 rounded-lg" style="background:#EBE9FB;color:#5244B8">دوشنبه</div>
+            <div class="chip text-center text-[.62rem] py-1.5 rounded-lg" style="background:#F0EFF9;color:#9a98b0">سه‌شنبه</div>
+          </div>
+          <div class="grid grid-cols-3 gap-1.5 mb-4">
+            <div class="text-center text-[.62rem] py-1.5 rounded-lg" style="background:#fff;color:#5244B8;box-shadow:0 2px 8px -4px rgba(108,92,231,.5)">۱۲:۰۰</div>
+            <div class="text-center text-[.62rem] py-1.5 rounded-lg text-white" style="background:#F07A8E">۱۲:۳۰</div>
+            <div class="text-center text-[.62rem] py-1.5 rounded-lg" style="background:#fff;color:#5244B8;box-shadow:0 2px 8px -4px rgba(108,92,231,.5)">۱۳:۰۰</div>
+          </div>
+          <div class="text-center text-[.72rem] py-2.5 rounded-xl text-white font-semibold" style="background:#6C5CE7">رزرو نوبت</div>
+        </div>
+      </div>
+      <div class="absolute -bottom-4 -start-4 bg-white rounded-xl shadow-card px-3.5 py-2.5 flex items-center gap-2 text-ink text-[.78rem] font-semibold ring-1 ring-black/5">
+        <span class="w-6 h-6 grid place-items-center rounded-lg bg-mint/15 text-mint">✓</span>
+        <span data-i18n="hero_float">پیامک تأیید ارسال شد</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="bg-white border-y border-black/5">
+  <div class="max-w-6xl mx-auto px-5 py-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-ink-soft text-sm">
+    <div data-i18n="trust1">🌐 دوزبانه (فارسی/انگلیسی)</div>
+    <div data-i18n="trust2">📱 پیامک خودکار</div>
+    <div data-i18n="trust3">💻 ویزیت آنلاین</div>
+    <div data-i18n="trust4">🤖 دستیار هوش مصنوعی</div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+  <div class="max-w-2xl">
+    <h2 class="display text-3xl md:text-4xl text-ink" data-i18n="feat_h">همهٔ چیزی که مطب امروزی لازم دارد</h2>
+    <p class="text-ink-soft text-lg leading-loose mt-4" data-i18n="feat_sub">یک سیستم کامل، نه چند ابزار جدا — از نوبت‌دهی تا پرداخت و پاسخ به بیمار.</p>
+  </div>
+  <div class="grid md:grid-cols-3 gap-4 mt-10">
+    <div class="card-hover md:col-span-2 bg-white rounded-2xl p-6 shadow-card border border-black/5">
+      <div class="w-11 h-11 grid place-items-center rounded-xl bg-violet-soft text-violet text-xl mb-4">📅</div>
+      <h3 class="font-bold text-lg text-ink" data-i18n="f1_t">نوبت‌دهی آنلاین</h3>
+      <p class="text-ink-soft leading-loose mt-2" data-i18n="f1_d">تقویم یک هفتهٔ پیش‌رو، انتخاب روز و زمان خالی، و ثبت با نام، کد ملی و موبایل. ساعت‌های کاری دقیقاً مطابق برنامهٔ شما.</p>
+    </div>
+    <div class="card-hover bg-white rounded-2xl p-6 shadow-card border border-black/5">
+      <div class="w-11 h-11 grid place-items-center rounded-xl bg-coral/12 text-coral text-xl mb-4">📱</div>
+      <h3 class="font-bold text-lg text-ink" data-i18n="f2_t">پیامک خودکار</h3>
+      <p class="text-ink-soft leading-loose mt-2" data-i18n="f2_d">تأیید نوبت و لینک لغو برای بیمار پیامک می‌شود — بدون نیاز به ایمیل.</p>
+    </div>
+    <div class="card-hover bg-white rounded-2xl p-6 shadow-card border border-black/5">
+      <div class="w-11 h-11 grid place-items-center rounded-xl bg-mint/15 text-mint text-xl mb-4">💻</div>
+      <h3 class="font-bold text-lg text-ink" data-i18n="f3_t">ویزیت آنلاین</h3>
+      <p class="text-ink-soft leading-loose mt-2" data-i18n="f3_d">ویزیت صوتی یا متنی از طریق واتس‌اپ، همراه با پیش‌پرداخت کارت‌به‌کارت.</p>
+    </div>
+    <div class="card-hover bg-white rounded-2xl p-6 shadow-card border border-black/5">
+      <div class="w-11 h-11 grid place-items-center rounded-xl bg-violet-soft text-violet text-xl mb-4">🤖</div>
+      <h3 class="font-bold text-lg text-ink" data-i18n="f4_t">دستیار هوش مصنوعی</h3>
+      <p class="text-ink-soft leading-loose mt-2" data-i18n="f4_d">به سؤال‌های رایج بیماران دربارهٔ ساعات، خدمات و نوبت پاسخ می‌دهد؛ بدون توصیهٔ پزشکی.</p>
+    </div>
+    <div class="card-hover bg-white rounded-2xl p-6 shadow-card border border-black/5">
+      <div class="w-11 h-11 grid place-items-center rounded-xl bg-coral/12 text-coral text-xl mb-4">🔔</div>
+      <h3 class="font-bold text-lg text-ink" data-i18n="f5_t">اطلاع به مطب</h3>
+      <p class="text-ink-soft leading-loose mt-2" data-i18n="f5_d">هر نوبت در تلگرام و بله با دکمهٔ تأیید/رد به دست شما می‌رسد.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="bg-white border-y border-black/5">
+  <div class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+    <h2 class="display text-3xl md:text-4xl text-ink text-center" data-i18n="how_h">در سه قدم ساده</h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-12">
+      <div class="relative">
+        <div class="font-display text-5xl text-violet-soft">۱</div>
+        <h3 class="font-bold text-lg text-ink mt-2" data-i18n="s1_t">درخواست می‌دهید</h3>
+        <p class="text-ink-soft leading-loose mt-2" data-i18n="s1_d">فرم پایین را پر کنید؛ در کمتر از یک روز با شما تماس می‌گیریم.</p>
+      </div>
+      <div class="relative">
+        <div class="font-display text-5xl text-violet-soft">۲</div>
+        <h3 class="font-bold text-lg text-ink mt-2" data-i18n="s2_t">ما می‌سازیم</h3>
+        <p class="text-ink-soft leading-loose mt-2" data-i18n="s2_d">وب‌سایت و نوبت‌دهی را با اطلاعات، خدمات و برنامهٔ مطب شما آماده می‌کنیم.</p>
+      </div>
+      <div class="relative">
+        <div class="font-display text-5xl text-violet-soft">۳</div>
+        <h3 class="font-bold text-lg text-ink mt-2" data-i18n="s3_t">تحویل و راه‌اندازی</h3>
+        <p class="text-ink-soft leading-loose mt-2" data-i18n="s3_d">روی دامنهٔ خودتان منتشر می‌شود و آموزش کوتاه کار با آن را می‌بینید.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="plans" class="max-w-6xl mx-auto px-5 py-20 md:py-24">
+  <div class="text-center max-w-2xl mx-auto">
+    <h2 class="display text-3xl md:text-4xl text-ink" data-i18n="plans_h">پلن‌ها</h2>
+    <p class="text-ink-soft text-lg leading-loose mt-4" data-i18n="plans_sub">یک‌بار راه‌اندازی، به‌اضافهٔ هزینهٔ ماهانهٔ میزبانی و پشتیبانی. قیمت‌ها نمونه‌اند و قابل‌تنظیم.</p>
+  </div>
+  <div class="grid md:grid-cols-3 gap-5 mt-12 items-start">
+    <!-- Basic -->
+    <div class="card-hover bg-white rounded-2xl p-7 shadow-card border border-black/5">
+      <h3 class="font-display text-xl text-ink" data-i18n="p1_name">پایه</h3>
+      <p class="text-ink-soft text-sm mt-1" data-i18n="p1_for">وب‌سایت + نوبت‌دهی</p>
+      <div class="mt-5 mb-1 text-ink"><span class="display text-3xl" data-i18n="p1_price">۰۰۰٬۰۰۰</span> <span class="text-ink-soft text-sm" data-i18n="cur">تومان راه‌اندازی</span></div>
+      <div class="text-ink-soft text-sm" data-i18n="p1_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</div>
+      <ul class="mt-6 space-y-3 text-[.95rem]">
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p1_1">وب‌سایت دوزبانه و واکنش‌گرا</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p1_2">نوبت‌دهی آنلاین با کد ملی</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p1_3">پیامک تأیید و لغو</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p1_4">اطلاع نوبت در تلگرام/بله</span></li>
+      </ul>
+      <button class="choose btn btn-light w-full mt-7 py-3" data-plan="basic" data-i18n="p_choose">انتخاب این پلن</button>
+    </div>
+    <!-- Pro (popular) -->
+    <div class="card-hover bg-ink text-white rounded-2xl p-7 shadow-lift relative scale-[1.02]">
+      <span class="absolute top-5 end-5 text-[.72rem] font-bold bg-coral text-white rounded-full px-3 py-1" data-i18n="p_popular">محبوب‌ترین</span>
+      <h3 class="font-display text-xl" data-i18n="p2_name">حرفه‌ای</h3>
+      <p class="text-white/60 text-sm mt-1" data-i18n="p2_for">+ ویزیت آنلاین و پرداخت</p>
+      <div class="mt-5 mb-1"><span class="display text-3xl" data-i18n="p2_price">۰۰۰٬۰۰۰</span> <span class="text-white/60 text-sm" data-i18n="cur2">تومان راه‌اندازی</span></div>
+      <div class="text-white/60 text-sm" data-i18n="p2_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</div>
+      <ul class="mt-6 space-y-3 text-[.95rem]">
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p2_1">همهٔ امکانات پلن پایه</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p2_2">ویزیت آنلاین (صوتی/متنی)</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p2_3">پیش‌پرداخت کارت‌به‌کارت</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p2_4">لغو توسط بیمار + مدیریت روزهای تعطیل</span></li>
+      </ul>
+      <button class="choose btn btn-coral w-full mt-7 py-3" data-plan="pro" data-i18n="p_choose2">انتخاب این پلن</button>
+    </div>
+    <!-- Premium -->
+    <div class="card-hover bg-white rounded-2xl p-7 shadow-card border border-black/5">
+      <h3 class="font-display text-xl text-ink" data-i18n="p3_name">ویژه</h3>
+      <p class="text-ink-soft text-sm mt-1" data-i18n="p3_for">+ هوش مصنوعی و طراحی اختصاصی</p>
+      <div class="mt-5 mb-1 text-ink"><span class="display text-3xl" data-i18n="p3_price">۰۰۰٬۰۰۰</span> <span class="text-ink-soft text-sm" data-i18n="cur3">تومان راه‌اندازی</span></div>
+      <div class="text-ink-soft text-sm" data-i18n="p3_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</div>
+      <ul class="mt-6 space-y-3 text-[.95rem]">
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p3_1">همهٔ امکانات پلن حرفه‌ای</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p3_2">دستیار هوش مصنوعی (Claude)</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p3_3">طراحی و برندینگ اختصاصی</span></li>
+        <li class="flex gap-2.5"><span class="text-mint">✓</span><span data-i18n="p3_4">پشتیبانی و اولویت ویژه</span></li>
+      </ul>
+      <button class="choose btn btn-light w-full mt-7 py-3" data-plan="premium" data-i18n="p_choose3">انتخاب این پلن</button>
+    </div>
+  </div>
+  <p class="text-center text-ink-soft text-sm mt-6" data-i18n="plans_note">مطمئن نیستید کدام پلن؟ فرم را پر کنید تا راهنمایی کنیم.</p>
+</section>
+
+<!-- REQUEST FORM -->
+<section id="request" class="bg-white border-y border-black/5">
+  <div class="max-w-3xl mx-auto px-5 py-20 md:py-24">
+    <div class="text-center max-w-xl mx-auto">
+      <h2 class="display text-3xl md:text-4xl text-ink" data-i18n="form_h">درخواست مشاورهٔ رایگان</h2>
+      <p class="text-ink-soft text-lg leading-loose mt-4" data-i18n="form_sub">فرم را پر کنید؛ در کمتر از یک روز کاری با شما تماس می‌گیریم. بدون تعهد.</p>
+    </div>
+    <form id="leadForm" class="mt-10 grid md:grid-cols-2 gap-4" novalidate>
+      <label class="block"><span class="block text-sm font-semibold text-ink mb-1.5" data-i18n="l_name">نام و نام خانوادگی</span>
+        <input class="field" id="f_name" name="name" required data-i18n-attr="placeholder" data-i18n="ph_name" placeholder="مثلاً دکتر سارا احمدی"></label>
+      <label class="block"><span class="block text-sm font-semibold text-ink mb-1.5" data-i18n="l_clinic">تخصص / نام مطب</span>
+        <input class="field" id="f_clinic" name="clinic" data-i18n-attr="placeholder" data-i18n="ph_clinic" placeholder="مثلاً متخصص کودکان"></label>
+      <label class="block"><span class="block text-sm font-semibold text-ink mb-1.5" data-i18n="l_phone">شمارهٔ موبایل</span>
+        <input class="field" id="f_phone" name="phone" dir="ltr" style="text-align:start" data-i18n-attr="placeholder" data-i18n="ph_phone" placeholder="۰۹۱۲۰۰۰۰۰۰۰"></label>
+      <label class="block"><span class="block text-sm font-semibold text-ink mb-1.5" data-i18n="l_email">ایمیل <span class="text-ink-soft font-normal text-xs" data-i18n="l_opt">(اختیاری)</span></span>
+        <input class="field" id="f_email" name="email" type="email" dir="ltr" style="text-align:start" placeholder="you@example.com"></label>
+      <label class="block md:col-span-2"><span class="block text-sm font-semibold text-ink mb-1.5" data-i18n="l_plan">پلن موردنظر</span>
+        <select class="field" id="f_plan" name="plan">
+          <option value="" data-i18n="opt_none">— انتخاب کنید (اختیاری) —</option>
+          <option value="basic" data-i18n="opt_basic">پایه</option>
+          <option value="pro" data-i18n="opt_pro">حرفه‌ای</option>
+          <option value="premium" data-i18n="opt_premium">ویژه</option>
+        </select></label>
+      <label class="block md:col-span-2"><span class="block text-sm font-semibold text-ink mb-1.5" data-i18n="l_msg">توضیحات</span>
+        <textarea class="field" id="f_message" name="message" rows="4" data-i18n-attr="placeholder" data-i18n="ph_msg" placeholder="هر چیزی که دوست دارید بدانیم…"></textarea></label>
+      <input type="text" name="company" id="f_company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+      <div class="md:col-span-2 flex flex-col items-center gap-3 mt-2">
+        <button type="submit" id="submitBtn" class="btn btn-coral px-8 py-3.5 w-full md:w-auto" data-i18n="form_submit">ارسال درخواست</button>
+        <p id="formMsg" class="text-sm text-center" role="status"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="max-w-3xl mx-auto px-5 py-20 md:py-24">
+  <h2 class="display text-3xl md:text-4xl text-ink text-center" data-i18n="faq_h">سؤال‌های پرتکرار</h2>
+  <div class="mt-10 space-y-3" id="faqList">
+    <details class="group bg-white rounded-2xl border border-black/5 shadow-card overflow-hidden">
+      <summary class="cursor-pointer list-none px-6 py-5 font-bold text-ink flex items-center justify-between gap-4"><span data-i18n="q1">چقدر طول می‌کشد تا سایت آماده شود؟</span><span class="text-violet transition-transform group-open:rotate-45">+</span></summary>
+      <p class="px-6 pb-5 text-ink-soft leading-loose" data-i18n="a1">معمولاً چند روز کاری، بسته به پلن و اطلاعاتی که در اختیار ما می‌گذارید.</p>
+    </details>
+    <details class="group bg-white rounded-2xl border border-black/5 shadow-card overflow-hidden">
+      <summary class="cursor-pointer list-none px-6 py-5 font-bold text-ink flex items-center justify-between gap-4"><span data-i18n="q2">آیا می‌توانم از دامنهٔ خودم استفاده کنم؟</span><span class="text-violet transition-transform group-open:rotate-45">+</span></summary>
+      <p class="px-6 pb-5 text-ink-soft leading-loose" data-i18n="a2">بله. سایت روی دامنهٔ خودتان منتشر می‌شود و اگر دامنه ندارید، برایتان تهیه می‌کنیم.</p>
+    </details>
+    <details class="group bg-white rounded-2xl border border-black/5 shadow-card overflow-hidden">
+      <summary class="cursor-pointer list-none px-6 py-5 font-bold text-ink flex items-center justify-between gap-4"><span data-i18n="q3">پیامک و ویزیت آنلاین چطور کار می‌کند؟</span><span class="text-violet transition-transform group-open:rotate-45">+</span></summary>
+      <p class="px-6 pb-5 text-ink-soft leading-loose" data-i18n="a3">پیامک از طریق سامانهٔ پیامکی ایرانی ارسال می‌شود و ویزیت آنلاین روی واتس‌اپ انجام می‌گیرد. جزئیات را هنگام راه‌اندازی هماهنگ می‌کنیم.</p>
+    </details>
+    <details class="group bg-white rounded-2xl border border-black/5 shadow-card overflow-hidden">
+      <summary class="cursor-pointer list-none px-6 py-5 font-bold text-ink flex items-center justify-between gap-4"><span data-i18n="q4">اطلاعات بیماران امن است؟</span><span class="text-violet transition-transform group-open:rotate-45">+</span></summary>
+      <p class="px-6 pb-5 text-ink-soft leading-loose" data-i18n="a4">بله. اطلاعات روی سرور اختصاصی و خصوصی نگهداری می‌شود و دستیار هوشمند هیچ توصیهٔ پزشکی نمی‌دهد.</p>
+    </details>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-ink text-white/80">
+  <div class="max-w-6xl mx-auto px-5 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-2 font-display text-xl text-white">
+      <span class="inline-grid place-items-center w-8 h-8 rounded-xl bg-violet text-white">✦</span> ainoor
+    </div>
+    <p class="text-sm text-center" data-i18n="foot_tag">وب‌سایت‌های هوشمند برای پزشکان</p>
+    <div class="flex items-center gap-4 text-sm">
+      <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="hover:text-white" data-i18n="foot_demo">نمونهٔ زنده</a>
+      <a href="#request" class="hover:text-white" data-i18n="foot_cta">درخواست</a>
+    </div>
+  </div>
+  <div class="text-center text-white/40 text-xs pb-8" data-i18n="foot_copy">© Ainoor — همهٔ حقوق محفوظ است.</div>
+</footer>
+
+</main>
+
+<script>
+/* ---------- bilingual toggle (fa default; en overrides via dict) ---------- */
+const EN = {
+  meta_title:"Ainoor — Smart websites & booking for clinics",
+  meta_desc:"Professional websites and smart booking for doctors: SMS, online visits, and an AI assistant.",
+  nav_features:"Features", nav_how:"How it works", nav_plans:"Plans", nav_faq:"FAQ", nav_cta:"Request a demo",
+  hero_badge:"Built for doctors", hero_title:"Your clinic, online and intelligent.",
+  hero_sub:"A professional website with online booking, automatic SMS, online visits, and an AI assistant — set up and live in days.",
+  hero_cta1:"Get a free consultation", hero_cta2:"See a live demo",
+  hero_trust1:"No tech skills needed", hero_trust2:"On your own domain", hero_trust3:"Support in Persian",
+  hero_float:"Confirmation SMS sent",
+  trust1:"🌐 Bilingual (FA/EN)", trust2:"📱 Automatic SMS", trust3:"💻 Online visits", trust4:"🤖 AI assistant",
+  feat_h:"Everything a modern clinic needs", feat_sub:"One complete system, not a pile of tools — from booking to payment to answering patients.",
+  f1_t:"Online booking", f1_d:"A week-ahead calendar, pick an open day and time, book with name, national ID and mobile. Hours match your real schedule.",
+  f2_t:"Automatic SMS", f2_d:"The patient gets a confirmation and a cancel link by SMS — no email required.",
+  f3_t:"Online visits", f3_d:"Voice or text visits over WhatsApp, with card-to-card prepayment.",
+  f4_t:"AI assistant", f4_d:"Answers common patient questions about hours, services and booking — never medical advice.",
+  f5_t:"Clinic alerts", f5_d:"Every booking reaches you on Telegram and Bale with a confirm/decline button.",
+  how_h:"Three simple steps",
+  s1_t:"You request", s1_d:"Fill the form below; we get back to you within a day.",
+  s2_t:"We build", s2_d:"We set up the site and booking with your info, services and schedule.",
+  s3_t:"Launch", s3_d:"It goes live on your domain and we give you a short walkthrough.",
+  plans_h:"Plans", plans_sub:"A one-time setup plus a monthly hosting & support fee. Prices are samples and adjustable.",
+  p1_name:"Basic", p1_for:"Website + booking", p1_price:"000,000", cur:"Toman setup", p1_monthly:"+ 000,000 Toman / month",
+  p1_1:"Bilingual, responsive website", p1_2:"Online booking with national ID", p1_3:"Confirmation & cancel SMS", p1_4:"Booking alerts on Telegram/Bale",
+  p2_name:"Pro", p2_for:"+ online visits & payment", p2_price:"000,000", cur2:"Toman setup", p2_monthly:"+ 000,000 Toman / month",
+  p2_1:"Everything in Basic", p2_2:"Online visits (voice/text)", p2_3:"Card-to-card prepayment", p2_4:"Patient self-cancel + day-off management",
+  p3_name:"Premium", p3_for:"+ AI & custom design", p3_price:"000,000", cur3:"Toman setup", p3_monthly:"+ 000,000 Toman / month",
+  p3_1:"Everything in Pro", p3_2:"AI assistant (Claude)", p3_3:"Custom design & branding", p3_4:"Priority support",
+  p_popular:"Most popular", p_choose:"Choose this plan", p_choose2:"Choose this plan", p_choose3:"Choose this plan",
+  plans_note:"Not sure which plan? Fill the form and we'll advise.",
+  form_h:"Get a free consultation", form_sub:"Fill the form and we'll contact you within one business day. No commitment.",
+  l_name:"Full name", l_clinic:"Specialty / clinic name", l_phone:"Mobile number", l_email:"Email", l_opt:"(optional)",
+  l_plan:"Preferred plan", l_msg:"Notes",
+  ph_name:"e.g. Dr. Sara Ahmadi", ph_clinic:"e.g. Pediatrician", ph_phone:"e.g. +98 912 000 0000", ph_msg:"Anything you'd like us to know…",
+  opt_none:"— select (optional) —", opt_basic:"Basic", opt_pro:"Pro", opt_premium:"Premium",
+  form_submit:"Send request",
+  faq_h:"Frequently asked",
+  q1:"How long until the site is ready?", a1:"Usually a few business days, depending on the plan and the information you give us.",
+  q2:"Can I use my own domain?", a2:"Yes. The site is published on your own domain, and if you don't have one we'll get it for you.",
+  q3:"How do SMS and online visits work?", a3:"SMS goes through an Iranian gateway and online visits run over WhatsApp. We arrange the details at setup.",
+  q4:"Is patient data secure?", a4:"Yes. Data is kept on a private, dedicated server and the AI assistant never gives medical advice.",
+  foot_tag:"Smart websites for doctors", foot_demo:"Live demo", foot_cta:"Request", foot_copy:"© Ainoor — all rights reserved.",
+  // messages
+  m_sending:"Sending…", m_ok:"Thank you! Your request was sent — we'll be in touch shortly.", m_err:"Name and a phone or valid email are required.", m_fail:"Couldn't send. Please try again or email us.",
+};
+const FA_MSG = { m_sending:"در حال ارسال…", m_ok:"ممنون! درخواست شما ارسال شد — به‌زودی با شما تماس می‌گیریم.", m_err:"نام و یک شماره یا ایمیل معتبر لازم است.", m_fail:"ارسال نشد. لطفاً دوباره تلاش کنید یا ایمیل بزنید." };
+
+const FA = {};
+document.querySelectorAll('[data-i18n]').forEach(el=>{
+  const k = el.getAttribute('data-i18n');
+  const attr = el.getAttribute('data-i18n-attr');
+  FA[k] = attr ? el.getAttribute(attr) : el.textContent;
+});
+let LANG = 'fa';
+try { LANG = localStorage.getItem('ainoor_lang') || 'fa'; } catch(e){}
+
+function applyLang(lang){
+  LANG = lang;
+  const src = lang === 'en' ? EN : FA;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    const val = src[k]; if (val == null) return;
+    const attr = el.getAttribute('data-i18n-attr');
+    if (attr) el.setAttribute(attr, val); else el.textContent = val;
+  });
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+  document.getElementById('langBtn').textContent = lang === 'en' ? 'فارسی' : 'English';
+  try { localStorage.setItem('ainoor_lang', lang); } catch(e){}
+}
+document.getElementById('langBtn').addEventListener('click', ()=> applyLang(LANG === 'en' ? 'fa' : 'en'));
+if (LANG === 'en') applyLang('en');
+
+/* plan chips -> preselect in form + scroll */
+document.querySelectorAll('.choose').forEach(b=> b.addEventListener('click', ()=>{
+  const p = b.getAttribute('data-plan');
+  const sel = document.getElementById('f_plan'); if (sel) sel.value = p;
+  document.getElementById('request').scrollIntoView({ behavior:'smooth' });
+  setTimeout(()=> document.getElementById('f_name').focus(), 500);
+}));
+
+/* lead form submit */
+const form = document.getElementById('leadForm');
+const msg = document.getElementById('formMsg');
+const mStr = (k)=> LANG === 'en' ? EN[k] : FA_MSG[k];
+form.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const name = document.getElementById('f_name').value.trim();
+  const phone = document.getElementById('f_phone').value.trim();
+  const email = document.getElementById('f_email').value.trim();
+  const emailOk = !email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!name || (!phone && !email) || !emailOk){ msg.style.color='#d14'; msg.textContent = mStr('m_err'); return; }
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; msg.style.color='#5B5878'; msg.textContent = mStr('m_sending');
+  const payload = { name, clinic:document.getElementById('f_clinic').value.trim(), phone, email,
+    plan:document.getElementById('f_plan').value, message:document.getElementById('f_message').value.trim(),
+    company:document.getElementById('f_company').value, lang:LANG };
+  try {
+    const r = await fetch('/api/lead', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(payload) });
+    const j = await r.json();
+    if (j.ok){ form.reset(); msg.style.color='#1FB9A0'; msg.textContent = mStr('m_ok'); }
+    else throw new Error(j.error||'failed');
+  } catch(err){ msg.style.color='#d14'; msg.textContent = mStr('m_fail'); }
+  finally { btn.disabled = false; }
+});
+</script>
+</body>
+</html>

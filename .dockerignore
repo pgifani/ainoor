@@ -1,0 +1,7 @@
+.git
+.env
+leads.json
+data
+.claude
+client-intake.html
+*.md

@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فرم اطلاعات وب‌سایت مطب — Ainoor</title>
+<meta name="description" content="فرم جمع‌آوری اطلاعات برای ساخت وب‌سایت و سیستم نوبت‌دهی مطب">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2B2A40; --ink-soft:#6B6885; --line:rgba(108,92,231,.12);
+    --violet:#6C5CE7; --violet-deep:#5244B8; --violet-soft:#EBE9FB;
+    --coral:#F07A8E; --marigold:#F6A08C; --marigold-soft:#FCE6DD;
+    --sage:#F0EFF9; --paper:#FDFDFF; --card:#FFFFFF;
+    --r:22px;
+    --shadow-soft:0 18px 40px -22px rgba(43,42,64,.30), inset 0 1px 0 rgba(255,255,255,.9);
+    --shadow-press:inset 0 2px 6px rgba(43,42,64,.12), inset 0 -1px 0 rgba(255,255,255,.7);
+    --shadow-btn:0 12px 24px -12px rgba(108,92,231,.6), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:'Vazirmatn',system-ui,sans-serif; color:var(--ink);
+    background:
+      radial-gradient(1100px 500px at 110% -10%, #EFE9FF 0%, transparent 55%),
+      radial-gradient(900px 500px at -10% 0%, #FCE6DD 0%, transparent 50%),
+      var(--sage);
+    line-height:1.85; font-size:15px; min-height:100vh;
+  }
+  .wrap{ max-width:820px; margin:0 auto; padding:28px 18px 140px; }
+
+  /* Header */
+  header.hero{
+    background:linear-gradient(135deg,var(--violet) 0%,var(--violet-deep) 100%);
+    color:#fff; border-radius:28px; padding:28px 30px; margin-bottom:22px;
+    box-shadow:0 22px 48px -22px rgba(108,92,231,.6);
+  }
+  .hero .brand{ font-size:13px; font-weight:700; letter-spacing:.4px; opacity:.92; }
+  .hero h1{ margin:8px 0 8px; font-size:23px; font-weight:800; line-height:1.4; }
+  .hero p{ margin:0; font-size:14px; opacity:.95; }
+  .hero .hint{ margin-top:14px; font-size:12.5px; background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.25); padding:9px 14px; border-radius:14px; }
+
+  /* Progress saved pill */
+  #savedPill{ position:fixed; top:14px; inset-inline-start:50%; transform:translateX(50%);
+    background:#fff; color:var(--violet-deep); font-size:12.5px; font-weight:700;
+    padding:7px 16px; border-radius:999px; box-shadow:var(--shadow-soft);
+    opacity:0; transition:opacity .3s; z-index:40; pointer-events:none; }
+  #savedPill.show{ opacity:1; }
+
+  section.card{
+    background:var(--card); border-radius:var(--r); padding:20px 22px; margin:0 0 16px;
+    box-shadow:var(--shadow-soft);
+  }
+  .sec-head{ display:flex; align-items:center; gap:11px; margin:0 0 4px; }
+  .sec-ico{ width:36px; height:36px; border-radius:12px; flex:0 0 36px;
+    display:flex; align-items:center; justify-content:center; font-size:18px;
+    background:var(--violet-soft);
+    box-shadow:inset 0 2px 4px rgba(255,255,255,.75), 0 8px 16px -10px rgba(108,92,231,.55); }
+  .sec-head h2{ margin:0; font-size:16.5px; font-weight:800; color:var(--violet-deep); }
+  .sec-sub{ font-size:12.5px; color:var(--ink-soft); margin:0 0 14px; padding-inline-start:47px; }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px 14px; }
+  @media (max-width:640px){ .grid2{ grid-template-columns:1fr; } }
+  .full{ grid-column:1 / -1; }
+
+  label.fld{ display:block; }
+  label.fld > span.lbl{ display:block; font-size:13px; font-weight:600; margin:0 0 6px; color:var(--ink); }
+  label.fld > span.lbl .req{ color:var(--coral); margin-inline-start:3px; }
+  .ctl{
+    width:100%; font-family:inherit; font-size:14.5px; color:var(--ink);
+    background:var(--sage); border:1px solid transparent; border-radius:14px;
+    padding:11px 14px; box-shadow:var(--shadow-press); outline:none; transition:border-color .15s, box-shadow .15s;
+  }
+  .ctl::placeholder{ color:#9b98b4; }
+  textarea.ctl{ resize:vertical; min-height:92px; line-height:1.8; }
+  .ctl:focus{ border-color:var(--violet); box-shadow:var(--shadow-press), 0 0 0 4px var(--violet-soft); }
+  select.ctl{ appearance:none; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%236B6885' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 6l4 4 4-4'/></svg>");
+    background-repeat:no-repeat; background-position:left 14px center; padding-inline-start:38px; }
+
+  /* checkbox chips */
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{ position:relative; }
+  .chip input{ position:absolute; opacity:0; inset:0; cursor:pointer; }
+  .chip span{ display:inline-block; padding:8px 16px; border-radius:999px; font-size:13.5px; font-weight:600;
+    background:var(--sage); color:var(--ink-soft); box-shadow:var(--shadow-press); cursor:pointer; transition:.15s; user-select:none; }
+  .chip input:checked + span{ background:var(--violet); color:#fff; box-shadow:var(--shadow-btn); }
+  .chip input:focus-visible + span{ outline:2px solid var(--violet-deep); outline-offset:2px; }
+
+  /* schedule */
+  .sched-row{ display:grid; grid-template-columns:92px 1fr auto; align-items:center; gap:10px;
+    padding:9px 0; border-bottom:1px dashed var(--line); }
+  .sched-row:last-child{ border-bottom:0; }
+  .sched-day{ font-weight:700; font-size:14px; }
+  .sched-times{ display:flex; align-items:center; gap:8px; }
+  .sched-times input{ width:120px; }
+  .sched-times .to{ color:var(--ink-soft); font-size:12.5px; }
+  .sched-row.closed .sched-times{ opacity:.35; pointer-events:none; }
+  .closed-toggle{ display:flex; align-items:center; gap:6px; font-size:12.5px; color:var(--ink-soft); white-space:nowrap; }
+  .closed-toggle input{ width:16px; height:16px; accent-color:var(--coral); }
+  @media (max-width:640px){
+    .sched-row{ grid-template-columns:1fr; gap:6px; }
+    .sched-times input{ width:100%; }
+  }
+
+  .note{ font-size:12px; color:var(--ink-soft); margin-top:6px; }
+
+  /* action bar */
+  .actionbar{
+    position:fixed; inset-inline:0; bottom:0; z-index:30;
+    background:rgba(253,253,255,.9); backdrop-filter:blur(10px);
+    border-top:1px solid var(--line); box-shadow:0 -10px 30px -18px rgba(43,42,64,.4);
+    padding:12px 16px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;
+  }
+  .btn{ font-family:inherit; font-size:14px; font-weight:700; border:0; cursor:pointer;
+    padding:12px 20px; border-radius:14px; transition:transform .1s, box-shadow .15s; }
+  .btn:active{ transform:translateY(1px); }
+  .btn-primary{ background:var(--violet); color:#fff; box-shadow:var(--shadow-btn); }
+  .btn-primary:hover{ background:var(--violet-deep); }
+  .btn-soft{ background:#fff; color:var(--violet-deep); box-shadow:var(--shadow-soft); }
+  .btn-ghost{ background:transparent; color:var(--ink-soft); box-shadow:none; }
+  .btn-ghost:hover{ color:var(--coral); }
+
+  footer.credit{ text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:8px; }
+  footer.credit b{ color:var(--violet-deep); }
+
+  @media print{
+    body{ background:#fff; }
+    .actionbar, #savedPill, .hero .hint{ display:none !important; }
+    section.card{ box-shadow:none; border:1px solid #e5e3f3; break-inside:avoid; }
+    .wrap{ padding-bottom:20px; }
+  }
+</style>
+</head>
+<body>
+<div id="savedPill">ذخیره شد ✓</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand">Ainoor · وب‌سایت‌های هوشمند برای پزشکان</div>
+    <h1>فرم اطلاعات وب‌سایت مطب</h1>
+    <p>لطفاً این فرم را با حوصله پر کنید تا وب‌سایت و سیستم نوبت‌دهی مطب شما دقیقاً مطابق نیازتان ساخته شود.</p>
+    <div class="hint">
+      ✍️ اطلاعات شما همین‌جا در مرورگر ذخیره می‌شود؛ می‌توانید بعداً ادامه دهید.
+      در پایان، دکمه‌ی <b>«دانلود اطلاعات»</b> یا <b>«کپی خلاصه»</b> را بزنید و فایل/متن را برای ما بفرستید.
+      ستاره‌دارها (<span style="color:#FFD2C8">*</span>) ضروری‌اند.
+    </div>
+  </header>
+
+  <!-- 1. Doctor -->
+  <section class="card" id="sec-doctor" data-section="اطلاعات پزشک">
+    <div class="sec-head"><div class="sec-ico">🩺</div><h2>۱. اطلاعات پزشک</h2></div>
+    <div class="sec-sub">نام و معرفی پزشک که در صفحه‌ی اصلی نمایش داده می‌شود.</div>
+    <div class="grid2">
+      <label class="fld"><span class="lbl">نام و نام خانوادگی (فارسی)<span class="req">*</span></span>
+        <input class="ctl" data-key="name_fa" data-label="نام (فارسی)" placeholder="مثلاً دکتر فروغ هاشمی"></label>
+      <label class="fld"><span class="lbl">نام به انگلیسی (برای نسخه‌ی انگلیسی سایت)</span>
+        <input class="ctl" data-key="name_en" data-label="نام (انگلیسی)" placeholder="Dr. Foroogh Hashemi" dir="ltr"></label>
+      <label class="fld"><span class="lbl">تخصص<span class="req">*</span></span>
+        <input class="ctl" data-key="specialty" data-label="تخصص" placeholder="مثلاً متخصص کودکان و نوزادان"></label>
+      <label class="fld"><span class="lbl">شعار یا جمله‌ی کوتاه معرفی</span>
+        <input class="ctl" data-key="tagline" data-label="شعار" placeholder="مثلاً: با آرامش، کنار کودک شما"></label>
+      <label class="fld full"><span class="lbl">درباره‌ی پزشک (بیوگرافی کوتاه)</span>
+        <textarea class="ctl" data-key="bio" data-label="بیوگرافی" placeholder="سوابق، تحصیلات، تجربه، رویکرد درمانی…"></textarea></label>
+    </div>
+  </section>
+
+  <!-- 2. Contact -->
+  <section class="card" id="sec-contact" data-section="اطلاعات تماس">
+    <div class="sec-head"><div class="sec-ico">📍</div><h2>۲. اطلاعات تماس</h2></div>
+    <div class="sec-sub">این موارد در بخش تماس و پاورقی سایت می‌آید.</div>
+    <div class="grid2">
+      <label class="fld"><span class="lbl">تلفن مطب<span class="req">*</span></span>
+        <input class="ctl" data-key="phone" data-label="تلفن مطب" placeholder="۰۲۱…" dir="ltr"></label>
+      <label class="fld"><span class="lbl">شماره واتساپ (برای ویزیت آنلاین)</span>
+        <input class="ctl" data-key="whatsapp" data-label="واتساپ" placeholder="+98912…" dir="ltr"></label>
+      <label class="fld"><span class="lbl">ایمیل</span>
+        <input class="ctl" data-key="email" data-label="ایمیل" placeholder="example@gmail.com" dir="ltr"></label>
+      <label class="fld"><span class="lbl">اینستاگرام / شبکه‌ی اجتماعی</span>
+        <input class="ctl" data-key="social" data-label="شبکه اجتماعی" placeholder="@username یا لینک" dir="ltr"></label>
+      <label class="fld full"><span class="lbl">آدرس کامل مطب<span class="req">*</span></span>
+        <textarea class="ctl" data-key="address" data-label="آدرس" placeholder="استان، شهر، خیابان، پلاک، طبقه…"></textarea></label>
+      <label class="fld full"><span class="lbl">لینک نقشه (گوگل مپ یا نشان)</span>
+        <input class="ctl" data-key="map" data-label="لینک نقشه" placeholder="https://…" dir="ltr"></label>
+    </div>
+  </section>
+
+  <!-- 3. Services -->
+  <section class="card" id="sec-services" data-section="خدمات">
+    <div class="sec-head"><div class="sec-ico">🧸</div><h2>۳. خدمات</h2></div>
+    <div class="sec-sub">خدماتی که در بخش «خدمات» سایت معرفی می‌شوند.</div>
+    <div class="grid2">
+      <label class="fld full"><span class="lbl">فهرست خدمات<span class="req">*</span></span>
+        <textarea class="ctl" data-key="services" data-label="فهرست خدمات" placeholder="هر خدمت را در یک خط بنویسید، مثلاً:&#10;مراقبت از نوزادان و زردی&#10;تغذیه و شیردهی&#10;پایش رشد تا ۱۸ سالگی&#10;آسم و آلرژی"></textarea>
+        <div class="note">هر خط = یک خدمت.</div></label>
+      <label class="fld full"><span class="lbl">خدمت ویژه برای برجسته‌سازی (اختیاری)</span>
+        <input class="ctl" data-key="featured_service" data-label="خدمت ویژه" placeholder="مثلاً: سوراخ‌کردن گوش با طلای ۲۴ عیار"></label>
+      <label class="fld full"><span class="lbl">توضیح خدمت ویژه</span>
+        <textarea class="ctl" data-key="featured_desc" data-label="توضیح خدمت ویژه" placeholder="جزئیاتی که باید در کارت ویژه نمایش داده شود…"></textarea></label>
+    </div>
+  </section>
+
+  <!-- 4. Schedule -->
+  <section class="card" id="sec-schedule" data-section="برنامه هفتگی">
+    <div class="sec-head"><div class="sec-ico">📅</div><h2>۴. برنامه‌ی هفتگی مطب</h2></div>
+    <div class="sec-sub">برای هر روز ساعت شروع و پایان را وارد کنید؛ روزهای تعطیل را تیک بزنید. (ساعت ۲۴ساعته)</div>
+    <div id="schedule"></div>
+    <div class="note">مثال: شنبه ۱۲:۰۰ تا ۱۶:۰۰ — پنجشنبه تعطیل.</div>
+  </section>
+
+  <!-- 5. Booking -->
+  <section class="card" id="sec-booking" data-section="تنظیمات نوبت‌دهی">
+    <div class="sec-head"><div class="sec-ico">⏱️</div><h2>۵. تنظیمات نوبت‌دهی</h2></div>
+    <div class="grid2">
+      <label class="fld"><span class="lbl">مدت هر نوبت (دقیقه)</span>
+        <input class="ctl" type="number" min="5" step="5" data-key="slot_minutes" data-label="مدت هر نوبت" value="15" dir="ltr"></label>
+      <label class="fld"><span class="lbl">نوبت‌ها تا چند روز جلوتر باز باشد؟</span>
+        <input class="ctl" type="number" min="1" max="30" data-key="days_ahead" data-label="بازه‌ی باز بودن نوبت" value="7" dir="ltr"></label>
+    </div>
+  </section>
+
+  <!-- 6. Online visits -->
+  <section class="card" id="sec-online" data-section="ویزیت آنلاین">
+    <div class="sec-head"><div class="sec-ico">💻</div><h2>۶. ویزیت آنلاین</h2></div>
+    <div class="sec-sub">ویزیت آنلاین از طریق واتساپ انجام می‌شود و پیش‌پرداخت کارت‌به‌کارت دارد.</div>
+    <div class="grid2">
+      <label class="fld"><span class="lbl">آیا ویزیت آنلاین ارائه می‌دهید؟</span>
+        <select class="ctl" data-key="online_offer" data-label="ارائه‌ی ویزیت آنلاین">
+          <option value="">— انتخاب کنید —</option>
+          <option value="بله">بله</option>
+          <option value="خیر">خیر</option>
+        </select></label>
+      <div class="fld"><span class="lbl">نوع ویزیت آنلاین</span>
+        <div class="chips" data-group="online_types" data-label="نوع ویزیت آنلاین">
+          <label class="chip"><input type="checkbox" data-opt="آنلاین صوتی"><span>آنلاین صوتی</span></label>
+          <label class="chip"><input type="checkbox" data-opt="آنلاین متنی"><span>آنلاین متنی</span></label>
+        </div>
+      </div>
+      <label class="fld"><span class="lbl">هزینه‌ی ویزیت آنلاین</span>
+        <input class="ctl" data-key="online_fee" data-label="هزینه‌ی ویزیت آنلاین" placeholder="مثلاً ۳۰۰٬۰۰۰ تومان"></label>
+      <label class="fld"><span class="lbl">شماره کارت برای پیش‌پرداخت</span>
+        <input class="ctl" data-key="card_number" data-label="شماره کارت" placeholder="۶۰۳۷-xxxx-xxxx-xxxx" dir="ltr"></label>
+      <label class="fld"><span class="lbl">نام صاحب کارت</span>
+        <input class="ctl" data-key="card_name" data-label="نام صاحب کارت" placeholder="مثلاً فروغ هاشمی"></label>
+    </div>
+  </section>
+
+  <!-- 7. Notifications -->
+  <section class="card" id="sec-notify" data-section="اطلاع‌رسانی نوبت‌ها">
+    <div class="sec-head"><div class="sec-ico">🔔</div><h2>۷. اطلاع‌رسانی نوبت‌ها</h2></div>
+    <div class="sec-sub">نوبت‌های جدید با دکمه‌ی تأیید/رد به پیام‌رسان شما فرستاده می‌شوند.</div>
+    <div class="grid2">
+      <label class="fld"><span class="lbl">نوبت‌ها به چه کسی اطلاع داده شود؟</span>
+        <select class="ctl" data-key="notify_who" data-label="گیرنده‌ی نوبت‌ها">
+          <option value="">— انتخاب کنید —</option>
+          <option value="خود پزشک">خود پزشک</option>
+          <option value="منشی">منشی</option>
+          <option value="گروه مشترک (پزشک + منشی)">گروه مشترک (پزشک + منشی)</option>
+        </select></label>
+      <div class="fld"><span class="lbl">پیام‌رسان مورد استفاده</span>
+        <div class="chips" data-group="messengers" data-label="پیام‌رسان">
+          <label class="chip"><input type="checkbox" data-opt="بله (Bale)"><span>بله (Bale)</span></label>
+          <label class="chip"><input type="checkbox" data-opt="تلگرام"><span>تلگرام</span></label>
+        </div>
+        <div class="note">برای مطب‌های داخل ایران، «بله» پایدارتر است.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Domain & brand -->
+  <section class="card" id="sec-brand" data-section="دامنه و برند">
+    <div class="sec-head"><div class="sec-ico">🎨</div><h2>۸. دامنه و برند</h2></div>
+    <div class="grid2">
+      <label class="fld"><span class="lbl">آیا دامنه (آدرس اینترنتی) دارید؟</span>
+        <select class="ctl" data-key="has_domain" data-label="وضعیت دامنه">
+          <option value="">— انتخاب کنید —</option>
+          <option value="دارم">دامنه دارم</option>
+          <option value="ندارم، لطفاً تهیه کنید">ندارم، لطفاً تهیه کنید</option>
+          <option value="فعلاً زیردامنه‌ی نمونه کافی است">فعلاً نمونه کافی است</option>
+        </select></label>
+      <label class="fld"><span class="lbl">دامنه‌ی دلخواه</span>
+        <input class="ctl" data-key="domain" data-label="دامنه‌ی دلخواه" placeholder="مثلاً drhashemi.ir" dir="ltr"></label>
+      <label class="fld"><span class="lbl">آیا لوگو دارید؟</span>
+        <select class="ctl" data-key="has_logo" data-label="لوگو">
+          <option value="">— انتخاب کنید —</option>
+          <option value="دارم (جدا می‌فرستم)">دارم (جدا می‌فرستم)</option>
+          <option value="ندارم">ندارم</option>
+        </select></label>
+      <label class="fld"><span class="lbl">رنگ یا حال‌وهوای دلخواه برند</span>
+        <input class="ctl" data-key="brand_mood" data-label="حال‌وهوای برند" placeholder="مثلاً آرام و پاستلی، یا سبز و سفید"></label>
+      <label class="fld full"><span class="lbl">عکس‌ها</span>
+        <input class="ctl" data-key="photos" data-label="توضیح عکس‌ها" placeholder="عکس پرتره‌ی پزشک و عکس مطب را جداگانه برای ما بفرستید؛ اینجا توضیح دهید چه عکس‌هایی دارید."></label>
+      <div class="note full">📎 فایل عکس و لوگو را لطفاً جداگانه (ایمیل/پیام‌رسان) بفرستید؛ این فرم فقط متن را ذخیره می‌کند.</div>
+    </div>
+  </section>
+
+  <!-- 9. Chatbot -->
+  <section class="card" id="sec-chatbot" data-section="دستیار هوشمند (چت‌بات)">
+    <div class="sec-head"><div class="sec-ico">🤖</div><h2>۹. دستیار هوشمند</h2></div>
+    <div class="sec-sub">سایت یک چت‌بات هوشمند دارد که به سؤال بیماران پاسخ می‌دهد (بدون توصیه‌ی پزشکی).</div>
+    <label class="fld"><span class="lbl">نکاتی که دستیار باید بداند</span>
+      <textarea class="ctl" data-key="chatbot_facts" data-label="دانسته‌های چت‌بات" placeholder="مثلاً: کدام بیمه‌ها پذیرفته می‌شود؟ بیمار چه چیزهایی همراه بیاورد؟ سیاست لغو نوبت؟ نکات قیمت؟ پارکینگ؟"></textarea></label>
+  </section>
+
+  <!-- 10. Other -->
+  <section class="card" id="sec-other" data-section="ملاحظات دیگر">
+    <div class="sec-head"><div class="sec-ico">📝</div><h2>۱۰. ملاحظات دیگر</h2></div>
+    <label class="fld"><span class="lbl">هر توضیح، درخواست یا سلیقه‌ی دیگری</span>
+      <textarea class="ctl" data-key="notes" data-label="ملاحظات" placeholder="هر چیزی که فکر می‌کنید باید بدانیم…"></textarea></label>
+  </section>
+
+  <footer class="credit">ساخته‌شده توسط <b>Ainoor</b> — وب‌سایت‌های هوشمند برای پزشکان</footer>
+</div>
+
+<div class="actionbar">
+  <button class="btn btn-primary" onclick="downloadBrief()">⬇️ دانلود اطلاعات</button>
+  <button class="btn btn-soft" onclick="copySummary()">📋 کپی خلاصه</button>
+  <button class="btn btn-soft" onclick="window.print()">🖨️ چاپ / PDF</button>
+  <button class="btn btn-ghost" onclick="clearForm()">پاک‌کردن فرم</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var STORE = "ainoor_clinic_intake_v1";
+  var DAYS = ["شنبه","یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه"];
+
+  /* ---- build schedule rows ---- */
+  var sched = document.getElementById("schedule");
+  DAYS.forEach(function(day, i){
+    var row = document.createElement("div");
+    row.className = "sched-row";
+    row.dataset.day = day;
+    row.innerHTML =
+      '<div class="sched-day">'+day+'</div>'+
+      '<div class="sched-times">'+
+        '<input class="ctl" type="time" data-role="from" aria-label="'+day+' از">'+
+        '<span class="to">تا</span>'+
+        '<input class="ctl" type="time" data-role="to" aria-label="'+day+' تا">'+
+      '</div>'+
+      '<label class="closed-toggle"><input type="checkbox" data-role="closed"><span>تعطیل</span></label>';
+    sched.appendChild(row);
+    var closed = row.querySelector('[data-role=closed]');
+    closed.addEventListener("change", function(){
+      row.classList.toggle("closed", closed.checked);
+      save();
+    });
+  });
+
+  /* ---- collect / restore ---- */
+  function collect(){
+    var data = { fields:{}, groups:{}, schedule:[] };
+    document.querySelectorAll('[data-key]').forEach(function(el){
+      data.fields[el.dataset.key] = { label: el.dataset.label, value: (el.value||"").trim() };
+    });
+    document.querySelectorAll('[data-group]').forEach(function(g){
+      var picked = [];
+      g.querySelectorAll('input[type=checkbox]').forEach(function(c){ if(c.checked) picked.push(c.dataset.opt); });
+      data.groups[g.dataset.group] = { label: g.dataset.label, value: picked };
+    });
+    document.querySelectorAll('#schedule .sched-row').forEach(function(r){
+      data.schedule.push({
+        day: r.dataset.day,
+        closed: r.querySelector('[data-role=closed]').checked,
+        from: r.querySelector('[data-role=from]').value,
+        to: r.querySelector('[data-role=to]').value
+      });
+    });
+    return data;
+  }
+
+  function restore(data){
+    if(!data) return;
+    try{
+      Object.keys(data.fields||{}).forEach(function(k){
+        var el = document.querySelector('[data-key="'+k+'"]');
+        if(el) el.value = data.fields[k].value || "";
+      });
+      Object.keys(data.groups||{}).forEach(function(k){
+        var g = document.querySelector('[data-group="'+k+'"]');
+        if(!g) return;
+        var vals = data.groups[k].value || [];
+        g.querySelectorAll('input[type=checkbox]').forEach(function(c){ c.checked = vals.indexOf(c.dataset.opt) > -1; });
+      });
+      (data.schedule||[]).forEach(function(s){
+        var r = document.querySelector('#schedule .sched-row[data-day="'+s.day+'"]');
+        if(!r) return;
+        var cl = r.querySelector('[data-role=closed]');
+        cl.checked = !!s.closed; r.classList.toggle("closed", !!s.closed);
+        r.querySelector('[data-role=from]').value = s.from || "";
+        r.querySelector('[data-role=to]').value = s.to || "";
+      });
+    }catch(e){}
+  }
+
+  /* ---- autosave ---- */
+  var pill = document.getElementById("savedPill"), pillT;
+  function flashSaved(){ pill.classList.add("show"); clearTimeout(pillT); pillT = setTimeout(function(){ pill.classList.remove("show"); }, 1100); }
+  function save(){ try{ localStorage.setItem(STORE, JSON.stringify(collect())); flashSaved(); }catch(e){} }
+  var saveT;
+  document.addEventListener("input", function(){ clearTimeout(saveT); saveT = setTimeout(save, 500); });
+  try{ restore(JSON.parse(localStorage.getItem(STORE))); }catch(e){}
+
+  /* ---- summary text ---- */
+  function buildSummary(){
+    var d = collect(), out = [];
+    out.push("فرم اطلاعات وب‌سایت مطب — Ainoor");
+    out.push("تاریخ تکمیل: " + new Date().toLocaleString("fa-IR"));
+    out.push("");
+    document.querySelectorAll('section[data-section]').forEach(function(sec){
+      var title = sec.dataset.section, lines = [];
+      sec.querySelectorAll('[data-key]').forEach(function(el){
+        var v = (el.value||"").trim();
+        if(v) lines.push("• " + el.dataset.label + ": " + v);
+      });
+      sec.querySelectorAll('[data-group]').forEach(function(g){
+        var vals = []; g.querySelectorAll('input:checked').forEach(function(c){ vals.push(c.dataset.opt); });
+        if(vals.length) lines.push("• " + g.dataset.label + ": " + vals.join("، "));
+      });
+      if(sec.id === "sec-schedule"){
+        d.schedule.forEach(function(s){
+          if(s.closed) lines.push("• " + s.day + ": تعطیل");
+          else if(s.from || s.to) lines.push("• " + s.day + ": " + (s.from||"—") + " تا " + (s.to||"—"));
+        });
+      }
+      if(lines.length){ out.push("【 " + title + " 】"); out = out.concat(lines); out.push(""); }
+    });
+    return out.join("\n");
+  }
+
+  function fileStamp(){
+    var name = (document.querySelector('[data-key=name_fa]').value || "clinic").trim().replace(/\s+/g,"-");
+    return name;
+  }
+
+  window.downloadBrief = function(){
+    var payload = { generatedAt: new Date().toISOString(), data: collect(), summary: buildSummary() };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:"application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "برگه-اطلاعات-" + fileStamp() + ".json";
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  };
+
+  window.copySummary = function(){
+    var text = buildSummary();
+    function done(){ alert("خلاصه کپی شد ✓ حالا می‌توانید آن را برای ما بفرستید."); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else { fallback(); }
+    function fallback(){
+      var ta = document.createElement("textarea"); ta.value = text;
+      ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta);
+      ta.select(); try{ document.execCommand("copy"); done(); }catch(e){ alert("کپی نشد؛ لطفاً دستی انتخاب کنید."); }
+      ta.remove();
+    }
+  };
+
+  window.clearForm = function(){
+    if(!confirm("همه‌ی اطلاعات فرم پاک شود؟")) return;
+    try{ localStorage.removeItem(STORE); }catch(e){}
+    document.querySelectorAll('[data-key]').forEach(function(el){
+      if(el.dataset.key === "slot_minutes") el.value = "15";
+      else if(el.dataset.key === "days_ahead") el.value = "7";
+      else el.value = "";
+    });
+    document.querySelectorAll('[data-group] input[type=checkbox]').forEach(function(c){ c.checked=false; });
+    document.querySelectorAll('#schedule .sched-row').forEach(function(r){
+      r.classList.remove("closed");
+      r.querySelector('[data-role=closed]').checked=false;
+      r.querySelector('[data-role=from]').value="";
+      r.querySelector('[data-role=to]').value="";
+    });
+    window.scrollTo({ top:0, behavior:"smooth" });
+  };
+})();
+</script>
+</body>
+</html>
