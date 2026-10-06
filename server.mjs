@@ -12,7 +12,7 @@
 
 import { createServer } from "node:http";
 import { readFile, writeFile, mkdir, stat } from "node:fs/promises";
-import { join, extname, normalize, dirname } from "node:path";
+import { join, extname, normalize, dirname, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ENV = process.env;
@@ -38,14 +38,16 @@ const TYPES = {
   ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp",
   ".ico": "image/x-icon", ".woff": "font/woff", ".woff2": "font/woff2",
 };
+// Only these are ever served — never server code, configs, or leads.json (PII).
+const PUBLIC_EXT = new Set([".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".woff", ".woff2"]);
 
 const json = (res, code, obj) => { res.writeHead(code, { "content-type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 function readBody(req) {
   return new Promise((resolve) => {
-    let d = ""; req.on("data", (c) => { d += c; if (d.length > 1e5) req.destroy(); });
-    req.on("end", () => resolve(d));
+    let d = ""; req.on("data", (c) => { d += c; if (d.length > 1e5) { req.destroy(); resolve(""); } });
+    req.on("end", () => resolve(d)); req.on("error", () => resolve(""));
   });
 }
 
@@ -98,7 +100,8 @@ function rateOk(ip) {
 }
 
 async function handleLead(req, res) {
-  const ip = String(req.headers["x-forwarded-for"] || (req.socket && req.socket.remoteAddress) || "").split(",")[0].trim();
+  // Last X-Forwarded-For entry is the one Coolify's proxy appended; earlier ones are client-supplied.
+  const ip = String(req.headers["x-forwarded-for"] || (req.socket && req.socket.remoteAddress) || "").split(",").pop().trim();
   if (!rateOk(ip)) return json(res, 429, { ok: false, error: "too many requests" });
   let b;
   try { b = JSON.parse(await readBody(req)); } catch { return json(res, 400, { ok: false, error: "bad json" }); }
@@ -120,25 +123,35 @@ async function handleLead(req, res) {
 }
 
 async function serveStatic(req, res) {
-  let rel = decodeURIComponent((req.url || "/").split("?")[0]);
+  const notFound = () => { res.writeHead(404, { "content-type": "text/plain; charset=utf-8" }); res.end("404 Not Found"); };
+  let rel;
+  try { rel = decodeURIComponent((req.url || "/").split("?")[0]); } catch { res.writeHead(400); return res.end("400"); }
   if (rel === "/" || rel.endsWith("/")) rel = "/index.html";
   const full = normalize(join(ROOT, rel));
-  if (!full.startsWith(ROOT.replace(/[\\/]$/, ""))) { res.writeHead(403); return res.end("403"); }
+  const inRoot = full.startsWith(ROOT.replace(/[\\/]$/, "") + sep);
+  const inData = full.startsWith(normalize(DATA_DIR).replace(/[\\/]$/, "") + sep);
+  const hidden = rel.split(/[\\/]/).some((seg) => seg.startsWith(".")); // dotfiles and ".." traversal
+  if (!inRoot || inData || hidden || !PUBLIC_EXT.has(extname(full).toLowerCase())) return notFound();
   try {
     const s = await stat(full);
-    const file = s.isDirectory() ? join(full, "index.html") : full;
-    const body = await readFile(file);
-    res.writeHead(200, { "content-type": TYPES[extname(file).toLowerCase()] || "application/octet-stream", "cache-control": "no-store" });
+    if (!s.isFile()) return notFound();
+    const body = await readFile(full);
+    res.writeHead(200, { "content-type": TYPES[extname(full).toLowerCase()], "cache-control": "no-store" });
     res.end(body);
-  } catch { res.writeHead(404, { "content-type": "text/plain; charset=utf-8" }); res.end("404 Not Found"); }
+  } catch { notFound(); }
 }
 
 createServer(async (req, res) => {
-  const path = (req.url || "/").split("?")[0];
-  if (req.method === "POST" && path === "/api/lead") return handleLead(req, res);
-  if (req.method === "GET" && path === "/api/leads") return json(res, 200, await loadLeads()); // local convenience
-  if (req.method === "GET") return serveStatic(req, res);
-  res.writeHead(405); res.end("405");
+  try {
+    const path = (req.url || "/").split("?")[0];
+    if (req.method === "POST" && path === "/api/lead") return await handleLead(req, res);
+    if (req.method === "GET" || req.method === "HEAD") return await serveStatic(req, res);
+    res.writeHead(405); res.end("405");
+  } catch (e) {
+    console.error("request failed:", e.message);
+    if (!res.headersSent) res.writeHead(500);
+    res.end();
+  }
 }).listen(PORT, () => {
   console.log(`Ainoor site on http://localhost:${PORT}`);
   console.log(MAIL_ON ? `Lead email: Resend configured (to ${MAIL.to}).` : "Lead email: MOCK (set RESEND_API_KEY + MAIL_FROM + LEAD_TO to send real emails). Leads still saved to leads.json.");
