@@ -106,7 +106,7 @@ tailwind.config = { theme: { extend: {
           <span class="mx-auto text-[.7rem] text-ink-soft tracking-wide">demo.ainoor.io</span>
         </div>
         <div class="p-5" dir="rtl" style="background:linear-gradient(180deg,#FDFDFF,#F0EFF9)">
-          <div class="text-ink font-display text-lg">دکتر فروغ هاشمی</div>
+          <div class="text-ink font-display text-lg">دکتر نیلوفر صدری</div>
           <div class="text-ink-soft text-xs mb-3" style="color:#6B6885">متخصص کودکان و نوزادان</div>
           <div class="grid grid-cols-4 gap-1.5 mb-3">
             <div class="chip text-center text-[.62rem] py-1.5 rounded-lg" style="background:#EBE9FB;color:#5244B8">شنبه</div>
@@ -284,6 +284,14 @@ tailwind.config = { theme: { extend: {
         <p id="formMsg" class="text-sm text-center" role="status"></p>
       </div>
     </form>
+    <div class="mt-10 pt-8 border-t border-black/5 text-center">
+      <p class="text-ink-soft" data-i18n="chat_h">ترجیح می‌دهید پیام بدهید؟ مستقیم بنویسید:</p>
+      <div class="flex flex-wrap justify-center gap-3 mt-4">
+        <a href="https://wa.me/447356007709" target="_blank" rel="noopener" class="btn btn-light px-5 py-3"><span class="w-2.5 h-2.5 rounded-full bg-[#25D366]" aria-hidden="true"></span><span data-i18n="c_wa">پیام در واتس‌اپ</span></a>
+        <a href="https://t.me/+447356007709" target="_blank" rel="noopener" class="btn btn-light px-5 py-3"><span class="w-2.5 h-2.5 rounded-full bg-[#2AABEE]" aria-hidden="true"></span><span data-i18n="c_tg">پیام در تلگرام</span></a>
+      </div>
+      <p class="text-ink-soft text-sm mt-3"><span dir="ltr">+44 7356 007709</span></p>
+    </div>
   </div>
 </section>
 
@@ -317,9 +325,11 @@ tailwind.config = { theme: { extend: {
       <span class="inline-grid place-items-center w-8 h-8 rounded-xl bg-violet text-white">✦</span> ainoor
     </div>
     <p class="text-sm text-center" data-i18n="foot_tag">وب‌سایت‌های هوشمند برای پزشکان</p>
-    <div class="flex items-center gap-4 text-sm">
+    <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm">
       <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="hover:text-white" data-i18n="foot_demo">نمونهٔ زنده</a>
       <a href="#request" class="hover:text-white" data-i18n="foot_cta">درخواست</a>
+      <a href="https://wa.me/447356007709" target="_blank" rel="noopener" class="hover:text-white" data-i18n="foot_wa">واتس‌اپ</a>
+      <a href="https://t.me/+447356007709" target="_blank" rel="noopener" class="hover:text-white" data-i18n="foot_tg">تلگرام</a>
     </div>
   </div>
   <div class="text-center text-white/40 text-xs pb-8" data-i18n="foot_copy">© Ainoor — همهٔ حقوق محفوظ است.</div>
@@ -364,16 +374,17 @@ const EN = {
   ph_name:"e.g. Dr. Sara Ahmadi", ph_clinic:"e.g. Pediatrician", ph_phone:"e.g. +98 912 000 0000", ph_msg:"Anything you'd like us to know…",
   opt_none:"— select (optional) —", opt_basic:"Basic", opt_pro:"Pro", opt_premium:"Premium",
   form_submit:"Send request",
+  chat_h:"Prefer to message? Reach us directly:", c_wa:"Message on WhatsApp", c_tg:"Message on Telegram",
   faq_h:"Frequently asked",
   q1:"How long until the site is ready?", a1:"Usually a few business days, depending on the plan and the information you give us.",
   q2:"Can I use my own domain?", a2:"Yes. The site is published on your own domain, and if you don't have one we'll get it for you.",
   q3:"How do SMS and online visits work?", a3:"SMS goes through an Iranian gateway and online visits run over WhatsApp. We arrange the details at setup.",
   q4:"Is patient data secure?", a4:"Yes. Data is kept on a private, dedicated server and the AI assistant never gives medical advice.",
-  foot_tag:"Smart websites for doctors", foot_demo:"Live demo", foot_cta:"Request", foot_copy:"© Ainoor — all rights reserved.",
+  foot_tag:"Smart websites for doctors", foot_demo:"Live demo", foot_cta:"Request", foot_wa:"WhatsApp", foot_tg:"Telegram", foot_copy:"© Ainoor — all rights reserved.",
   // messages
-  m_sending:"Sending…", m_ok:"Thank you! Your request was sent — we'll be in touch shortly.", m_err:"Name and a phone or valid email are required.", m_fail:"Couldn't send. Please try again or email us.",
+  m_sending:"Sending…", m_ok:"Thank you! Your request was sent — we'll be in touch shortly.", m_err:"Name and a phone or valid email are required.", m_fail:"Couldn't send. Try again, or message us on WhatsApp.",
 };
-const FA_MSG = { m_sending:"در حال ارسال…", m_ok:"ممنون! درخواست شما ارسال شد — به‌زودی با شما تماس می‌گیریم.", m_err:"نام و یک شماره یا ایمیل معتبر لازم است.", m_fail:"ارسال نشد. لطفاً دوباره تلاش کنید یا ایمیل بزنید." };
+const FA_MSG = { m_sending:"در حال ارسال…", m_ok:"ممنون! درخواست شما ارسال شد — به‌زودی با شما تماس می‌گیریم.", m_err:"نام و یک شماره یا ایمیل معتبر لازم است.", m_fail:"ارسال نشد. دوباره تلاش کنید یا در واتس‌اپ پیام بدهید." };
 
 const FA = {};
 document.querySelectorAll('[data-i18n]').forEach(el=>{

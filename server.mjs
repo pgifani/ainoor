@@ -129,7 +129,9 @@ async function serveStatic(req, res) {
   if (rel === "/" || rel.endsWith("/")) rel = "/index.html";
   const full = normalize(join(ROOT, rel));
   const inRoot = full.startsWith(ROOT.replace(/[\\/]$/, "") + sep);
-  const inData = full.startsWith(normalize(DATA_DIR).replace(/[\\/]$/, "") + sep);
+  // When DATA_DIR is a subfolder (Docker: /app/data) block it outright; when it is ROOT (local dev)
+  // leads.json is already excluded by PUBLIC_EXT.
+  const inData = DATA_DIR !== ROOT && full.startsWith(normalize(DATA_DIR).replace(/[\\/]$/, "") + sep);
   const hidden = rel.split(/[\\/]/).some((seg) => seg.startsWith(".")); // dotfiles and ".." traversal
   if (!inRoot || inData || hidden || !PUBLIC_EXT.has(extname(full).toLowerCase())) return notFound();
   try {
