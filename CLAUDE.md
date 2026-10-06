@@ -12,8 +12,9 @@ lives in a different repo, `pgifani/dr-foroogh-hashemi`). Don't mix client work 
   `leads.json` backup. Runs in safe **mock mode** (prints to console) until env vars are set.
 - `Dockerfile` — Coolify build (Dockerfile strategy, port **3000**, data volume `/app/data`).
 - `client-intake.html` — the **detailed client-onboarding form** you send a doctor *after* they
-  reply to a lead (fills in everything needed to build their site; downloads JSON / copies summary).
-  Not deployed with the landing (it's in `.dockerignore`).
+  reply to a lead. Served at **`/intake`** (and `/client-intake.html`); its **Submit** button POSTs
+  to **`POST /api/intake`**, which emails the full submission to `LEAD_TO` (and saves `intake.json`).
+  Download/copy/print remain as fallbacks.
 - `.claude/skills/` — the agency's reusable skills:
   - **clinic-site-launch** — end-to-end launch of a new client site (repo → Coolify → domain →
     SMS/email → bots → verify). Start here for a new doctor.

@@ -20,6 +20,7 @@ const PORT = Number(ENV.PORT) || 3000;
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = ENV.DATA_DIR || ROOT;
 const LEADS_DB = join(DATA_DIR, "leads.json");
+const INTAKE_DB = join(DATA_DIR, "intake.json");
 
 const MAIL = {
   key: (ENV.RESEND_API_KEY || "").trim(),
@@ -122,6 +123,52 @@ async function handleLead(req, res) {
   json(res, 200, { ok: true });
 }
 
+/* ---------- detailed clinic-intake form (client-intake.html → /intake) ---------- */
+async function saveIntake(sub) {
+  try {
+    await mkdir(DATA_DIR, { recursive: true }).catch(() => {});
+    let all = []; try { all = JSON.parse(await readFile(INTAKE_DB, "utf8")); } catch {}
+    all.push(sub);
+    await writeFile(INTAKE_DB, JSON.stringify(all, null, 2));
+  } catch (e) { console.error("intake save failed:", e.message); }
+}
+
+async function sendIntakeEmail(sub) {
+  if (!MAIL_ON) { console.log(`[MOCK intake email -> ${MAIL.to}] ${sub.name}`); return; }
+  const html = `<div style="font-family:Tahoma,Arial,sans-serif;max-width:620px;margin:0 auto" dir="rtl">
+    <h2 style="color:#3F31A6;margin:0 0 4px">فرم اطلاعات مطب — ${esc(sub.name)}</h2>
+    <p style="color:#5B5878;margin:0 0 14px">یک فرم اطلاعات کامل از سایت Ainoor ثبت شد.</p>
+    <pre style="white-space:pre-wrap;font-family:Tahoma,Arial,sans-serif;font-size:14px;line-height:1.9;background:#FAF9FF;border:1px solid #eee;border-radius:12px;padding:16px;color:#191733">${esc(sub.summary)}</pre>
+  </div>`;
+  const replyTo = sub.email || MAIL.replyFallback;
+  try {
+    const r = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${MAIL.key}`, "content-type": "application/json" },
+      body: JSON.stringify({ from: MAIL.from, to: [MAIL.to], subject: `فرم اطلاعات مطب — ${sub.name}`, html, text: sub.summary, ...(replyTo ? { reply_to: replyTo } : {}) }),
+    });
+    if (!r.ok) console.error("intake email error:", ((await r.json().catch(() => ({}))).message) || r.status);
+  } catch (e) { console.error("intake email failed:", e.message); }
+}
+
+async function handleIntake(req, res) {
+  const ip = String(req.headers["x-forwarded-for"] || (req.socket && req.socket.remoteAddress) || "").split(",").pop().trim();
+  if (!rateOk(ip)) return json(res, 429, { ok: false, error: "too many requests" });
+  let b;
+  try { b = JSON.parse(await readBody(req)); } catch { return json(res, 400, { ok: false, error: "bad json" }); }
+  if (b.company) return json(res, 200, { ok: true }); // honeypot
+  const name = String(b.name || "").trim().slice(0, 160);
+  const email = String(b.email || "").trim().slice(0, 160);
+  const summary = String(b.summary || "").trim().slice(0, 40000);
+  const lang = b.lang === "en" ? "en" : "fa";
+  const data = (b.data && typeof b.data === "object") ? b.data : {};
+  if (!name || summary.length < 10) return json(res, 400, { ok: false, error: "name and form content are required" });
+  const sub = { name, email, summary, data, lang, at: new Date().toISOString(), ip };
+  await saveIntake(sub);
+  await sendIntakeEmail(sub);
+  json(res, 200, { ok: true });
+}
+
 async function serveStatic(req, res) {
   const notFound = () => { res.writeHead(404, { "content-type": "text/plain; charset=utf-8" }); res.end("404 Not Found"); };
   let rel;
@@ -147,6 +194,8 @@ createServer(async (req, res) => {
   try {
     const path = (req.url || "/").split("?")[0];
     if (req.method === "POST" && path === "/api/lead") return await handleLead(req, res);
+    if (req.method === "POST" && path === "/api/intake") return await handleIntake(req, res);
+    if ((req.method === "GET" || req.method === "HEAD") && path === "/intake") req.url = "/client-intake.html"; // friendly URL
     if (req.method === "GET" || req.method === "HEAD") return await serveStatic(req, res);
     res.writeHead(405); res.end("405");
   } catch (e) {

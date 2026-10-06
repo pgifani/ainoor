@@ -1,4 +1,5 @@
 .env
 leads.json
+intake.json
 data/
 node_modules/

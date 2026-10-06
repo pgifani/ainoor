@@ -316,10 +316,12 @@
 </div>
 
 <div class="actionbar">
-  <button class="btn btn-primary" onclick="downloadBrief()">⬇️ دانلود اطلاعات</button>
+  <input type="text" id="hp_company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
+  <button class="btn btn-primary" onclick="submitToAinoor()">📨 ارسال برای Ainoor</button>
+  <button class="btn btn-soft" onclick="downloadBrief()">⬇️ دانلود</button>
   <button class="btn btn-soft" onclick="copySummary()">📋 کپی خلاصه</button>
-  <button class="btn btn-soft" onclick="window.print()">🖨️ چاپ / PDF</button>
-  <button class="btn btn-ghost" onclick="clearForm()">پاک‌کردن فرم</button>
+  <button class="btn btn-ghost" onclick="clearForm()">پاک‌کردن</button>
+  <p id="sendMsg" role="status" style="flex-basis:100%;text-align:center;font-size:13px;margin:4px 0 0;min-height:1.1em"></p>
 </div>
 
 <script>
@@ -458,6 +460,22 @@
       ta.select(); try{ document.execCommand("copy"); done(); }catch(e){ alert("کپی نشد؛ لطفاً دستی انتخاب کنید."); }
       ta.remove();
     }
+  };
+
+  window.submitToAinoor = async function(){
+    var nameEl = document.querySelector('[data-key=name_fa]');
+    var emailEl = document.querySelector('[data-key=email]');
+    var name = nameEl ? nameEl.value.trim() : "";
+    var msg = document.getElementById('sendMsg');
+    if(!name){ msg.style.color="#d14"; msg.textContent="لطفاً ابتدا نام را وارد کنید."; if(nameEl){ nameEl.focus(); nameEl.scrollIntoView({behavior:"smooth",block:"center"}); } return; }
+    var payload = { name:name, email: emailEl ? emailEl.value.trim() : "", summary: buildSummary(), data: collect(), lang:"fa", company:(document.getElementById('hp_company')||{}).value||"" };
+    msg.style.color="#5B5878"; msg.textContent="در حال ارسال…";
+    try{
+      var r = await fetch('/api/intake', { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload) });
+      var j = await r.json();
+      if(j.ok){ msg.style.color="#1FB9A0"; msg.textContent="✓ اطلاعات شما برای Ainoor ارسال شد. ممنون!"; }
+      else throw new Error(j.error||'failed');
+    }catch(e){ msg.style.color="#d14"; msg.textContent="ارسال نشد. لطفاً دکمهٔ «دانلود» را بزنید و فایل را برای ما بفرستید."; }
   };
 
   window.clearForm = function(){
