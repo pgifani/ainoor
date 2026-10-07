@@ -55,7 +55,13 @@ tailwind.config = { theme: { extend: {
   @keyframes bloom{ from{ opacity:0; transform:scale(.55); } to{ opacity:1; transform:scale(1); } }
   /* soft blend into the body below */
   .hero-hem{ position:absolute; inset:auto 0 -1px 0; height:120px; pointer-events:none;
-    background:linear-gradient(180deg, transparent, #FDF8F3); }
+    background:linear-gradient(180deg, transparent, #FDF8F3); z-index:2; }
+
+  /* photographic sunrise hero background (upper-left light, calm right for text) */
+  .hero-img{ position:absolute; inset:0; pointer-events:none;
+    background:url("/hero.png") center center / cover no-repeat; }
+  .hero-img::after{ content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(253,248,243,.18) 0%, rgba(253,248,243,0) 32%, rgba(253,248,243,.6) 100%); }
 
   /* reveal on scroll — content is visible without JS; .anim gated so no-JS/reduced-motion show everything */
   .anim .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
@@ -125,8 +131,8 @@ tailwind.config = { theme: { extend: {
 
 <!-- HERO -->
 <section class="hero text-ink">
-  <div class="hero-glow"></div>
-  <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-28 md:pt-24 md:pb-36 grid md:grid-cols-[1.05fr_.95fr] gap-12 items-center">
+  <div class="hero-img"></div>
+  <div class="relative z-[1] max-w-6xl mx-auto px-5 pt-16 pb-28 md:pt-24 md:pb-36 grid md:grid-cols-[1.05fr_.95fr] gap-12 items-center">
     <div>
       <span class="inline-flex items-center gap-2 text-[.8rem] font-semibold bg-white/70 border border-black/5 rounded-full px-3.5 py-1.5 shadow-sm">
         <span class="w-1.5 h-1.5 rounded-full bg-noor-deep"></span><span data-i18n="hero_badge">ساخته‌شده برای پزشکان</span>
