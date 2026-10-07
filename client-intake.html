@@ -13,7 +13,7 @@
     --ink:#0B0F14; --ink-2:#11161D; --ink-soft:#5A6472; --line:#E4E7EC;
     --noor:#FFB84D; --noor-deep:#FF8A5B; --noor-warm:#FFD98A;
     --teal:#0E7C7B; --teal-soft:#E2F2F1;
-    --paper:#F7F8FA; --card:#FFFFFF;
+    --paper:#FDF8F3; --card:#FFFFFF;
     --r:20px;
     --shadow-soft:0 20px 50px -30px rgba(11,15,20,.28);
     --shadow-btn:0 16px 38px -12px rgba(255,138,91,.55);
@@ -34,22 +34,22 @@
 
   /* Header — the same dark→light "noor" hero as the landing */
   header.hero{
-    position:relative; overflow:hidden; background:var(--ink); color:#fff;
+    position:relative; overflow:hidden; background:linear-gradient(135deg,#FFEFE4 0%,#FDF4EC 42%,#E8F5F1 100%); color:#141A21;
     border-radius:26px; padding:30px 30px 32px; margin-bottom:22px;
-    box-shadow:0 30px 60px -32px rgba(11,15,20,.5);
+    box-shadow:0 24px 50px -34px rgba(11,15,20,.3); border:1px solid rgba(20,26,33,.05);
   }
-  header.hero .glow{ position:absolute; top:-160px; inset-inline-start:-120px; width:460px; height:460px; border-radius:50%;
-    background:radial-gradient(circle, rgba(255,184,77,.5) 0%, rgba(255,138,91,.18) 40%, transparent 70%); pointer-events:none; }
+  header.hero .glow{ position:absolute; top:-170px; inset-inline-start:-120px; width:460px; height:460px; border-radius:50%;
+    background:radial-gradient(circle, rgba(255,184,77,.4) 0%, rgba(255,138,91,.14) 40%, transparent 70%); pointer-events:none; }
   header.hero > *{ position:relative; }
-  .hero .brand{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; letter-spacing:.2px; color:#fff; opacity:.9; text-decoration:none; }
+  .hero .brand{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:700; letter-spacing:.2px; color:var(--ink); opacity:.85; text-decoration:none; }
   .hero .brand:hover{ opacity:1; }
-  .hero .brand .spark{ color:var(--noor); }
+  .hero .brand .spark{ color:var(--noor-deep); }
   .hero h1{ margin:14px 0 8px; font-size:24px; font-weight:800; line-height:1.4; }
-  .hero h1 .lite{ background:linear-gradient(92deg,var(--noor-warm),var(--noor-deep)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .hero p{ margin:0; font-size:14px; color:rgba(255,255,255,.72); }
-  .hero .hint{ margin-top:16px; font-size:12.5px; color:rgba(255,255,255,.8); background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.14); padding:10px 15px; border-radius:14px; line-height:1.9; }
-  .hero .hint b{ color:#fff; }
+  .hero h1 .lite{ background:linear-gradient(92deg,var(--noor),var(--noor-deep)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p{ margin:0; font-size:14px; color:var(--ink-soft); }
+  .hero .hint{ margin-top:16px; font-size:12.5px; color:var(--ink-soft); background:rgba(255,255,255,.6);
+    border:1px solid rgba(20,26,33,.1); padding:10px 15px; border-radius:14px; line-height:1.9; }
+  .hero .hint b{ color:var(--ink); }
 
   /* Saved pill */
   #savedPill{ position:fixed; top:14px; inset-inline-start:50%; transform:translateX(50%);
@@ -162,7 +162,7 @@
     <div class="hint">
       اطلاعات شما همین‌جا در مرورگر ذخیره می‌شود؛ می‌توانید بعداً ادامه دهید.
       در پایان، دکمهٔ <b>«ارسال برای آینور»</b> را بزنید (یا <b>«دانلود»</b> و فایل را برای ما بفرستید).
-      ستاره‌دارها (<span style="color:var(--noor-warm)">*</span>) ضروری‌اند.
+      ستاره‌دارها (<span style="color:var(--noor-deep)">*</span>) ضروری‌اند.
     </div>
   </header>
 

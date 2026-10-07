@@ -14,7 +14,7 @@ tailwind.config = { theme: { extend: {
     ink:   { DEFAULT:'#0B0F14', 2:'#11161D', soft:'#5A6472', line:'#E4E7EC' },
     noor:  { DEFAULT:'#FFB84D', deep:'#FF8A5B', warm:'#FFD98A' },
     teal:  { DEFAULT:'#0E7C7B', soft:'#E2F2F1' },
-    paper: '#F7F8FA',
+    paper: '#FDF8F3', sand:'#F3EBE1', mint:'#EAF5F2',
   },
   fontFamily: { body:['Vazirmatn','Inter','sans-serif'], display:['Vazirmatn','Instrument Serif','serif'] },
   boxShadow: {
@@ -27,7 +27,7 @@ tailwind.config = { theme: { extend: {
 <style>
   :root{ color-scheme: light; }
   html{ scroll-behavior:smooth; }
-  body{ background:#F7F8FA; color:#0B0F14; -webkit-font-smoothing:antialiased; }
+  body{ background:#FDF8F3; color:#141A21; -webkit-font-smoothing:antialiased; }
   ::selection{ background:rgba(255,184,77,.35); }
 
   /* type: Vazirmatn carries Persian; Instrument Serif + Inter carry English */
@@ -43,20 +43,19 @@ tailwind.config = { theme: { extend: {
     filter:drop-shadow(0 2px 20px rgba(255,160,90,.45));
   }
 
-  /* hero: dark ink, a warm "noor" blooming once on load */
-  .hero{ background:#0B0F14; position:relative; overflow:hidden; }
+  /* hero: a soft sunrise wash, a warm "noor" blooming once on load */
+  .hero{ background:linear-gradient(135deg,#FFEFE4 0%,#FDF4EC 42%,#E8F5F1 100%); position:relative; overflow:hidden; }
   .hero-glow{
-    position:absolute; width:720px; height:720px; border-radius:50%; top:-220px; pointer-events:none;
-    background:radial-gradient(circle, rgba(255,184,77,.55) 0%, rgba(255,138,91,.22) 38%, rgba(255,138,91,0) 70%);
+    position:absolute; width:720px; height:720px; border-radius:50%; top:-240px; pointer-events:none;
+    background:radial-gradient(circle, rgba(255,184,77,.42) 0%, rgba(255,138,91,.16) 38%, rgba(255,138,91,0) 70%);
     opacity:1; animation:bloom 1.7s cubic-bezier(.19,.73,.18,1) both;
   }
   html[dir="rtl"] .hero-glow{ left:-180px; }
   html[dir="ltr"] .hero-glow{ right:-180px; }
   @keyframes bloom{ from{ opacity:0; transform:scale(.55); } to{ opacity:1; transform:scale(1); } }
-  /* soft emergence from dark into the light sections below */
-  .hero-hem{ position:absolute; inset:auto 0 -1px 0; height:160px; pointer-events:none;
-    background:radial-gradient(60% 150% at 50% 120%, rgba(255,184,77,.18), transparent 70%),
-               linear-gradient(180deg, transparent, #F7F8FA); }
+  /* soft blend into the body below */
+  .hero-hem{ position:absolute; inset:auto 0 -1px 0; height:120px; pointer-events:none;
+    background:linear-gradient(180deg, transparent, #FDF8F3); }
 
   /* reveal on scroll — content is visible without JS; .anim gated so no-JS/reduced-motion show everything */
   .anim .reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
@@ -82,8 +81,8 @@ tailwind.config = { theme: { extend: {
   .btn-noor:hover{ box-shadow:0 20px 46px -12px rgba(255,138,91,.7); }
   .btn-ink{ background:#0B0F14; color:#fff; box-shadow:0 16px 36px -18px rgba(11,15,20,.6); }
   .btn-ink:hover{ background:#11161D; }
-  .btn-ghost{ background:rgba(255,255,255,.06); color:#fff; border:1px solid rgba(255,255,255,.22); }
-  .btn-ghost:hover{ background:rgba(255,255,255,.12); }
+  .btn-ghost{ background:rgba(255,255,255,.65); color:#141A21; border:1px solid rgba(20,26,33,.14); }
+  .btn-ghost:hover{ background:#fff; border-color:rgba(20,26,33,.3); }
   .btn-outline{ background:#fff; color:#0B0F14; border:1px solid #DFE3E9; }
   .btn-outline:hover{ border-color:#0B0F14; }
 
@@ -102,22 +101,22 @@ tailwind.config = { theme: { extend: {
 <a href="#features" class="sr-only">پرش به محتوا</a>
 
 <!-- NAV -->
-<header class="sticky top-0 z-40 backdrop-blur-md bg-ink/70 border-b border-white/10">
-  <nav class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-4 text-white">
+<header class="sticky top-0 z-40 backdrop-blur-md bg-paper/80 border-b border-black/5">
+  <nav class="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-4 text-ink">
     <a href="#top" class="flex items-center gap-2.5 text-xl font-display" style="font-weight:800">
-      <span class="text-noor"><svg viewBox="0 0 24 24" fill="none" class="w-7 h-7"><circle cx="12" cy="12" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.2v3M12 18.8v3M2.2 12h3M18.8 12h3M5.1 5.1l2 2M16.9 16.9l2 2M18.9 5.1l-2 2M7.1 16.9l-2 2"/></g></svg></span>
+      <span class="text-noor-deep"><svg viewBox="0 0 24 24" fill="none" class="w-7 h-7"><circle cx="12" cy="12" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.2v3M12 18.8v3M2.2 12h3M18.8 12h3M5.1 5.1l2 2M16.9 16.9l2 2M18.9 5.1l-2 2M7.1 16.9l-2 2"/></g></svg></span>
       <span data-i18n="brand">آینور</span>
     </a>
-    <div class="hidden md:flex items-center gap-7 text-[.95rem] text-white/70">
-      <a href="#features" class="hover:text-white transition-colors" data-i18n="nav_features">امکانات</a>
-      <a href="#how" class="hover:text-white transition-colors" data-i18n="nav_how">روند کار</a>
-      <a href="#work" class="hover:text-white transition-colors" data-i18n="nav_work">نمونهٔ واقعی</a>
-      <a href="#plans" class="hover:text-white transition-colors" data-i18n="nav_plans">پلن‌ها</a>
-      <a href="#faq" class="hover:text-white transition-colors" data-i18n="nav_faq">سؤال‌ها</a>
+    <div class="hidden md:flex items-center gap-7 text-[.95rem] text-ink-soft">
+      <a href="#features" class="hover:text-ink transition-colors" data-i18n="nav_features">امکانات</a>
+      <a href="#how" class="hover:text-ink transition-colors" data-i18n="nav_how">روند کار</a>
+      <a href="#work" class="hover:text-ink transition-colors" data-i18n="nav_work">نمونهٔ واقعی</a>
+      <a href="#plans" class="hover:text-ink transition-colors" data-i18n="nav_plans">پلن‌ها</a>
+      <a href="#faq" class="hover:text-ink transition-colors" data-i18n="nav_faq">سؤال‌ها</a>
     </div>
     <div class="flex items-center gap-2.5">
-      <button id="langBtn" class="text-[.9rem] font-semibold text-white/75 hover:text-white px-2.5 py-1 rounded-lg border border-white/15" aria-label="Change language">English</button>
-      <a href="/intake" class="btn btn-noor px-4 py-2 text-[.92rem]" data-i18n="nav_cta">درخواست سرویس</a>
+      <button id="langBtn" class="text-[.9rem] font-semibold text-ink-soft hover:text-ink px-2.5 py-1 rounded-lg border border-black/10" aria-label="Change language">English</button>
+      <a href="/intake" class="btn btn-ink px-4 py-2 text-[.92rem]" data-i18n="nav_cta">درخواست سرویس</a>
     </div>
   </nav>
 </header>
@@ -125,31 +124,31 @@ tailwind.config = { theme: { extend: {
 <main id="top">
 
 <!-- HERO -->
-<section class="hero text-white">
+<section class="hero text-ink">
   <div class="hero-glow"></div>
   <div class="relative max-w-6xl mx-auto px-5 pt-16 pb-28 md:pt-24 md:pb-36 grid md:grid-cols-[1.05fr_.95fr] gap-12 items-center">
     <div>
-      <span class="inline-flex items-center gap-2 text-[.8rem] font-semibold bg-white/8 border border-white/15 rounded-full px-3.5 py-1.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-noor"></span><span data-i18n="hero_badge">ساخته‌شده برای پزشکان</span>
+      <span class="inline-flex items-center gap-2 text-[.8rem] font-semibold bg-white/70 border border-black/5 rounded-full px-3.5 py-1.5 shadow-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-noor-deep"></span><span data-i18n="hero_badge">ساخته‌شده برای پزشکان</span>
       </span>
       <h1 class="display text-[2.6rem] md:text-[3.6rem] leading-[1.14] md:leading-[1.08] mt-6">
         <span data-i18n="hero_t1">کلینیک شما را به </span><span class="glow-word" data-i18n="hero_t2">روشنایی</span><span data-i18n="hero_t3"> می‌آوریم.</span>
       </h1>
-      <p class="text-white/70 text-lg leading-loose mt-6 max-w-[48ch]" data-i18n="hero_sub">وب‌سایت حرفه‌ای، نوبت‌دهی آنلاین، پیامک خودکار و دستیار هوش مصنوعی — طراحی، راه‌اندازی و تحویل روی دامنهٔ خودتان، در چند روز.</p>
+      <p class="text-ink-soft text-lg leading-loose mt-6 max-w-[48ch]" data-i18n="hero_sub">وب‌سایت حرفه‌ای، نوبت‌دهی آنلاین، پیامک خودکار و دستیار هوش مصنوعی — طراحی، راه‌اندازی و تحویل روی دامنهٔ خودتان، در چند روز.</p>
       <div class="flex flex-wrap gap-3 mt-9">
-        <a href="/intake" class="btn btn-noor px-6 py-3.5" data-i18n="hero_cta1">درخواست ساخت وب‌سایت</a>
+        <a href="/intake" class="btn btn-ink px-6 py-3.5" data-i18n="hero_cta1">درخواست ساخت وب‌سایت</a>
         <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="btn btn-ghost px-6 py-3.5" data-i18n="hero_cta2">دیدن نمونهٔ زنده</a>
       </div>
-      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mt-9 text-white/60 text-sm">
-        <span class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic text-noor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span data-i18n="hero_trust1">بدون دانش فنی</span></span>
-        <span class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic text-noor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span data-i18n="hero_trust2">روی دامنهٔ خودتان</span></span>
-        <span class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic text-noor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span data-i18n="hero_trust3">پشتیبانی فارسی</span></span>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mt-9 text-ink-soft text-sm">
+        <span class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic text-teal" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span data-i18n="hero_trust1">بدون دانش فنی</span></span>
+        <span class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic text-teal" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span data-i18n="hero_trust2">روی دامنهٔ خودتان</span></span>
+        <span class="inline-flex items-center gap-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic text-teal" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span data-i18n="hero_trust3">پشتیبانی فارسی</span></span>
       </div>
     </div>
 
     <!-- product preview: a real clinic, caught in the light -->
     <div class="relative">
-      <div class="rounded-2xl bg-white shadow-lift overflow-hidden ring-1 ring-white/10">
+      <div class="rounded-2xl bg-white shadow-lift overflow-hidden ring-1 ring-black/5">
         <div class="flex items-center gap-1.5 px-4 py-3 bg-[#EEF0F4] border-b border-black/5">
           <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></span>
           <span class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></span>
@@ -226,27 +225,27 @@ tailwind.config = { theme: { extend: {
 </section>
 
 <!-- HOW IT WORKS (real sequence -> numbered) -->
-<section id="how" class="bg-ink text-white relative overflow-hidden">
+<section id="how" class="bg-mint text-ink relative overflow-hidden border-y border-black/5">
   <div class="max-w-6xl mx-auto px-5 py-20 md:py-24">
     <div class="max-w-2xl reveal">
-      <p class="text-noor font-semibold text-sm mb-3" data-i18n="how_kicker">روند کار</p>
+      <p class="text-teal font-semibold text-sm mb-3" data-i18n="how_kicker">روند کار</p>
       <h2 class="display text-[1.9rem] md:text-[2.6rem] leading-tight" data-i18n="how_h">از درخواست تا راه‌اندازی، در سه قدم.</h2>
     </div>
     <ol class="grid md:grid-cols-3 gap-8 md:gap-6 mt-14">
       <li class="reveal">
-        <div class="flex items-baseline gap-3"><span class="display text-5xl text-noor" data-i18n="s1_n">۱</span><span class="h-px flex-1 bg-white/12 translate-y-[-6px]"></span></div>
+        <div class="flex items-baseline gap-3"><span class="display text-5xl text-noor-deep" data-i18n="s1_n">۱</span><span class="h-px flex-1 bg-black/10 translate-y-[-6px]"></span></div>
         <h3 class="font-bold text-lg mt-4" data-i18n="s1_t">درخواست می‌دهید</h3>
-        <p class="text-white/65 leading-loose mt-2" data-i18n="s1_d">فرم را پر می‌کنید؛ در کمتر از یک روز کاری با شما تماس می‌گیریم و نیازها را می‌شنویم.</p>
+        <p class="text-ink-soft leading-loose mt-2" data-i18n="s1_d">فرم را پر می‌کنید؛ در کمتر از یک روز کاری با شما تماس می‌گیریم و نیازها را می‌شنویم.</p>
       </li>
       <li class="reveal" data-d="1">
-        <div class="flex items-baseline gap-3"><span class="display text-5xl text-noor" data-i18n="s2_n">۲</span><span class="h-px flex-1 bg-white/12 translate-y-[-6px]"></span></div>
+        <div class="flex items-baseline gap-3"><span class="display text-5xl text-noor-deep" data-i18n="s2_n">۲</span><span class="h-px flex-1 bg-black/10 translate-y-[-6px]"></span></div>
         <h3 class="font-bold text-lg mt-4" data-i18n="s2_t">ما می‌سازیم</h3>
-        <p class="text-white/65 leading-loose mt-2" data-i18n="s2_d">وب‌سایت و نوبت‌دهی را با اطلاعات، خدمات، عکس‌ها و برنامهٔ مطب شما آماده می‌کنیم.</p>
+        <p class="text-ink-soft leading-loose mt-2" data-i18n="s2_d">وب‌سایت و نوبت‌دهی را با اطلاعات، خدمات، عکس‌ها و برنامهٔ مطب شما آماده می‌کنیم.</p>
       </li>
       <li class="reveal" data-d="2">
-        <div class="flex items-baseline gap-3"><span class="display text-5xl text-noor" data-i18n="s3_n">۳</span><span class="h-px flex-1 bg-white/12 translate-y-[-6px]"></span></div>
+        <div class="flex items-baseline gap-3"><span class="display text-5xl text-noor-deep" data-i18n="s3_n">۳</span><span class="h-px flex-1 bg-black/10 translate-y-[-6px]"></span></div>
         <h3 class="font-bold text-lg mt-4" data-i18n="s3_t">تحویل و راه‌اندازی</h3>
-        <p class="text-white/65 leading-loose mt-2" data-i18n="s3_d">روی دامنهٔ خودتان منتشر می‌شود و آموزش کوتاه کار با آن را می‌بینید.</p>
+        <p class="text-ink-soft leading-loose mt-2" data-i18n="s3_d">روی دامنهٔ خودتان منتشر می‌شود و آموزش کوتاه کار با آن را می‌بینید.</p>
       </li>
     </ol>
   </div>
@@ -312,19 +311,19 @@ tailwind.config = { theme: { extend: {
         <a href="/intake" class="btn btn-outline w-full mt-7 py-3" data-i18n="p_choose">درخواست این پلن</a>
       </div>
       <!-- Pro (popular) -->
-      <div class="card-hover bg-ink text-white rounded-[20px] p-7 shadow-lift relative md:scale-[1.03] reveal" data-d="1">
+      <div class="card-hover rounded-[20px] p-7 shadow-lift relative md:scale-[1.03] reveal" style="background:linear-gradient(180deg,#FFF7EC,#FFFFFF);border:1.5px solid #FFB84D" data-d="1">
         <span class="absolute top-6 end-6 text-[.72rem] font-bold rounded-full px-3 py-1" style="background:linear-gradient(94deg,#FFB84D,#FF8A5B);color:#231404" data-i18n="p_popular">محبوب‌ترین</span>
-        <h3 class="font-display text-xl" style="font-weight:700" data-i18n="p2_name">حرفه‌ای</h3>
-        <p class="text-white/55 text-sm mt-1" data-i18n="p2_for">+ ویزیت آنلاین و پرداخت</p>
-        <div class="mt-5 mb-1"><span class="display text-3xl" data-i18n="p2_price">۰۰۰٬۰۰۰</span> <span class="text-white/55 text-sm" data-i18n="cur2">تومان راه‌اندازی</span></div>
-        <div class="text-white/55 text-sm" data-i18n="p2_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</div>
-        <ul class="mt-6 space-y-3 text-[.95rem]">
-          <li class="flex gap-2.5"><span class="text-noor flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_1">همهٔ امکانات پلن پایه</span></li>
-          <li class="flex gap-2.5"><span class="text-noor flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_2">ویزیت آنلاین (صوتی/متنی)</span></li>
-          <li class="flex gap-2.5"><span class="text-noor flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_3">پیش‌پرداخت کارت‌به‌کارت</span></li>
-          <li class="flex gap-2.5"><span class="text-noor flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_4">لغو توسط بیمار + مدیریت روزهای تعطیل</span></li>
+        <h3 class="font-display text-xl text-ink" style="font-weight:700" data-i18n="p2_name">حرفه‌ای</h3>
+        <p class="text-ink-soft text-sm mt-1" data-i18n="p2_for">+ ویزیت آنلاین و پرداخت</p>
+        <div class="mt-5 mb-1 text-ink"><span class="display text-3xl" data-i18n="p2_price">۰۰۰٬۰۰۰</span> <span class="text-ink-soft text-sm" data-i18n="cur2">تومان راه‌اندازی</span></div>
+        <div class="text-ink-soft text-sm" data-i18n="p2_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</div>
+        <ul class="mt-6 space-y-3 text-[.95rem] text-ink">
+          <li class="flex gap-2.5"><span class="text-teal flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_1">همهٔ امکانات پلن پایه</span></li>
+          <li class="flex gap-2.5"><span class="text-teal flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_2">ویزیت آنلاین (صوتی/متنی)</span></li>
+          <li class="flex gap-2.5"><span class="text-teal flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_3">پیش‌پرداخت کارت‌به‌کارت</span></li>
+          <li class="flex gap-2.5"><span class="text-teal flex-none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="w-4 h-4 mt-1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></span><span data-i18n="p2_4">لغو توسط بیمار + مدیریت روزهای تعطیل</span></li>
         </ul>
-        <a href="/intake" class="btn btn-noor w-full mt-7 py-3" data-i18n="p_choose2">درخواست این پلن</a>
+        <a href="/intake" class="btn btn-ink w-full mt-7 py-3" data-i18n="p_choose2">درخواست این پلن</a>
       </div>
       <!-- Premium -->
       <div class="card card-hover p-7 reveal" data-d="2">
@@ -411,34 +410,34 @@ tailwind.config = { theme: { extend: {
 </section>
 
 <!-- FINAL CTA -->
-<section class="hero text-white relative overflow-hidden">
-  <div class="hero-glow" style="top:auto; bottom:-320px; animation:none; opacity:.9"></div>
+<section class="hero text-ink relative overflow-hidden border-t border-black/5">
+  <div class="hero-glow" style="top:auto; bottom:-340px; animation:none; opacity:.75"></div>
   <div class="relative max-w-3xl mx-auto px-5 py-20 md:py-24 text-center reveal">
     <h2 class="display text-[2rem] md:text-[2.8rem] leading-tight">آمادهٔ <span class="glow-word" data-i18n="cta_word">روشن‌شدن</span><span data-i18n="cta_h"> مطب‌تان هستید؟</span></h2>
-    <p class="text-white/70 text-lg leading-loose mt-5 max-w-[46ch] mx-auto" data-i18n="cta_sub">همین حالا درخواست دهید؛ چند روز بعد، بیمارها شما را آنلاین پیدا می‌کنند.</p>
+    <p class="text-ink-soft text-lg leading-loose mt-5 max-w-[46ch] mx-auto" data-i18n="cta_sub">همین حالا درخواست دهید؛ چند روز بعد، بیمارها شما را آنلاین پیدا می‌کنند.</p>
     <div class="flex flex-wrap justify-center gap-3 mt-8">
-      <a href="/intake" class="btn btn-noor px-7 py-3.5" data-i18n="cta_btn1">درخواست سرویس</a>
+      <a href="/intake" class="btn btn-ink px-7 py-3.5" data-i18n="cta_btn1">درخواست سرویس</a>
       <a href="https://wa.me/447356007709" target="_blank" rel="noopener" class="btn btn-ghost px-7 py-3.5" data-i18n="cta_btn2">گفت‌وگو در واتس‌اپ</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="bg-ink-2 text-white/70">
+<footer class="bg-sand text-ink-soft border-t border-black/5">
   <div class="max-w-6xl mx-auto px-5 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
-    <a href="#top" class="flex items-center gap-2.5 text-xl text-white font-display" style="font-weight:800">
-      <span class="text-noor"><svg viewBox="0 0 24 24" fill="none" class="w-7 h-7"><circle cx="12" cy="12" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.2v3M12 18.8v3M2.2 12h3M18.8 12h3M5.1 5.1l2 2M16.9 16.9l2 2M18.9 5.1l-2 2M7.1 16.9l-2 2"/></g></svg></span>
+    <a href="#top" class="flex items-center gap-2.5 text-xl text-ink font-display" style="font-weight:800">
+      <span class="text-noor-deep"><svg viewBox="0 0 24 24" fill="none" class="w-7 h-7"><circle cx="12" cy="12" r="3.6" fill="currentColor"/><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.2v3M12 18.8v3M2.2 12h3M18.8 12h3M5.1 5.1l2 2M16.9 16.9l2 2M18.9 5.1l-2 2M7.1 16.9l-2 2"/></g></svg></span>
       <span data-i18n="brand">آینور</span>
     </a>
     <p class="text-sm text-center" data-i18n="foot_tag">وب‌سایت‌های هوشمند برای پزشکان</p>
     <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm">
-      <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="hover:text-white transition-colors" data-i18n="foot_demo">نمونهٔ زنده</a>
-      <a href="/intake" class="hover:text-white transition-colors" data-i18n="foot_cta">فرم درخواست</a>
-      <a href="https://wa.me/447356007709" target="_blank" rel="noopener" class="hover:text-white transition-colors" data-i18n="foot_wa">واتس‌اپ</a>
-      <a href="https://t.me/+447356007709" target="_blank" rel="noopener" class="hover:text-white transition-colors" data-i18n="foot_tg">تلگرام</a>
+      <a href="https://demo.ainoor.io" target="_blank" rel="noopener" class="hover:text-ink transition-colors" data-i18n="foot_demo">نمونهٔ زنده</a>
+      <a href="/intake" class="hover:text-ink transition-colors" data-i18n="foot_cta">فرم درخواست</a>
+      <a href="https://wa.me/447356007709" target="_blank" rel="noopener" class="hover:text-ink transition-colors" data-i18n="foot_wa">واتس‌اپ</a>
+      <a href="https://t.me/+447356007709" target="_blank" rel="noopener" class="hover:text-ink transition-colors" data-i18n="foot_tg">تلگرام</a>
     </div>
   </div>
-  <div class="text-center text-white/35 text-xs pb-8" data-i18n="foot_copy">© آینور — همهٔ حقوق محفوظ است.</div>
+  <div class="text-center text-ink-soft/70 text-xs pb-8" data-i18n="foot_copy">© آینور — همهٔ حقوق محفوظ است.</div>
 </footer>
 
 </main>
