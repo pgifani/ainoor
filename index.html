@@ -268,6 +268,9 @@ html[lang=fa] .price b{font-family:'Vazirmatn',sans-serif;font-weight:800}
 .plan ul li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);transform:translateY(-1px)}
 .plan .btn{margin-top:auto}
 .note{text-align:center;color:var(--text-secondary);margin-top:28px}
+.founding{margin:16px 0 0;display:flex;justify-content:center}
+.founding span{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid rgba(255,138,91,.55);border-radius:999px;padding:6px 16px;font-size:.92rem;font-weight:600;color:#9A4A00;box-shadow:0 10px 26px -18px rgba(255,138,91,.9)}
+.founding span::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--noor);box-shadow:0 0 10px rgba(255,184,77,.9)}
 
 /* form */
 .formsec{position:relative}
@@ -514,30 +517,31 @@ footer .phone-no{direction:ltr;unicode-bidi:isolate}
     <div style="text-align:center">
       <span class="kicker rv" data-i18n="plans_kicker">پلن‌ها</span>
       <h2 class="display rv" data-i18n="plans_h">یک‌بار ساخت، بعد خیالتان راحت.</h2>
-      <p class="lede rv" style="margin-inline:auto" data-i18n="plans_sub">یک‌بار راه‌اندازی، به‌اضافهٔ هزینهٔ ماهانهٔ میزبانی و پشتیبانی. قیمت‌ها نمونه‌اند و قابل‌تنظیم.</p>
+      <p class="founding rv"><span data-i18n="plans_founding">قیمت ویژهٔ راه‌اندازی برای ۱۰ مطب اول</span></p>
+      <p class="lede rv" style="margin-inline:auto" data-i18n="plans_sub">یک‌بار راه‌اندازی، به‌اضافهٔ هزینهٔ ماهانهٔ میزبانی و پشتیبانی.</p>
     </div>
     <div class="plans">
       <article class="plan rv">
         <h3 data-i18n="p1_name">پایه</h3><p class="for" data-i18n="p1_for">وب‌سایت + نوبت‌دهی</p>
-        <p class="price"><b data-i18n="p1_price">۰۰۰٬۰۰۰</b><span data-i18n="cur">تومان راه‌اندازی</span></p><p class="monthly" data-i18n="p1_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</p>
+        <p class="price"><b data-i18n="p1_price">۹٬۹۰۰٬۰۰۰</b><span data-i18n="cur">تومان راه‌اندازی</span></p><p class="monthly" data-i18n="p1_monthly">+ ۹۹۰٬۰۰۰ تومان ماهانه</p>
         <ul><li data-i18n="p1_1">وب‌سایت دوزبانه و واکنش‌گرا</li><li data-i18n="p1_2">نوبت‌دهی آنلاین با کد ملی</li><li data-i18n="p1_3">پیامک تأیید و لغو</li><li data-i18n="p1_4">اطلاع نوبت در تلگرام و بله</li></ul>
         <a class="btn btn-ghost" href="#request" data-plan="basic" data-i18n="p_choose">درخواست این پلن</a>
       </article>
       <article class="plan pop rv">
         <span class="badge" data-i18n="p_popular">محبوب‌ترین</span>
         <h3 data-i18n="p2_name">حرفه‌ای</h3><p class="for" data-i18n="p2_for">+ ویزیت آنلاین و پرداخت</p>
-        <p class="price"><b data-i18n="p2_price">۰۰۰٬۰۰۰</b><span data-i18n="cur">تومان راه‌اندازی</span></p><p class="monthly" data-i18n="p2_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</p>
+        <p class="price"><b data-i18n="p2_price">۱۴٬۹۰۰٬۰۰۰</b><span data-i18n="cur">تومان راه‌اندازی</span></p><p class="monthly" data-i18n="p2_monthly">+ ۱٬۴۹۰٬۰۰۰ تومان ماهانه</p>
         <ul><li data-i18n="p2_1">همهٔ امکانات پلن پایه</li><li data-i18n="p2_2">ویزیت آنلاین (صوتی یا متنی)</li><li data-i18n="p2_3">پیش‌پرداخت کارت‌به‌کارت</li><li data-i18n="p2_4">لغو توسط بیمار + مدیریت روزهای تعطیل</li></ul>
         <a class="btn btn-noor" href="#request" data-plan="pro" data-i18n="p_choose">درخواست این پلن</a>
       </article>
       <article class="plan rv">
         <h3 data-i18n="p3_name">ویژه</h3><p class="for" data-i18n="p3_for">+ هوش مصنوعی و طراحی اختصاصی</p>
-        <p class="price"><b data-i18n="p3_price">۰۰۰٬۰۰۰</b><span data-i18n="cur">تومان راه‌اندازی</span></p><p class="monthly" data-i18n="p3_monthly">+ ۰۰۰٬۰۰۰ تومان ماهانه</p>
+        <p class="price"><b data-i18n="p3_price">۲۴٬۹۰۰٬۰۰۰</b><span data-i18n="cur">تومان راه‌اندازی</span></p><p class="monthly" data-i18n="p3_monthly">+ ۲٬۴۹۰٬۰۰۰ تومان ماهانه</p>
         <ul><li data-i18n="p3_1">همهٔ امکانات پلن حرفه‌ای</li><li data-i18n="p3_2">دستیار هوش مصنوعی (Claude)</li><li data-i18n="p3_3">طراحی و برندینگ اختصاصی</li><li data-i18n="p3_4">پشتیبانی و اولویت ویژه</li></ul>
         <a class="btn btn-ghost" href="#request" data-plan="premium" data-i18n="p_choose">درخواست این پلن</a>
       </article>
     </div>
-    <p class="note rv" data-i18n="plans_note">مطمئن نیستید کدام پلن؟ فرم را پر کنید تا راهنمایی کنیم.</p>
+    <p class="note rv"><span data-i18n="plans_sms">هزینهٔ پیامک جداگانه و به قیمت تمام‌شده حساب می‌شود.</span><br><span data-i18n="plans_note">مطمئن نیستید کدام پلن؟ فرم را پر کنید تا راهنمایی کنیم.</span></p>
   </div>
 </section>
 
@@ -660,12 +664,12 @@ const EN = {
   scr_h:"This week's appointments", sms_from:"SMS",
   slot1_t:"10:00", slot2_t:"12:45", slot3_t:"17:15", slot_ok:"Confirmed", slot_new:"New booking",
   cs_sms:"Your appointment is booked ✅ Sunday 12:45, children's clinic. To cancel: use the SMS link.",
-  plans_kicker:"Plans", plans_h:"Build it once, then relax.", plans_sub:"A one-time setup plus a monthly hosting and support fee. Prices are samples and adjustable.",
-  p1_name:"Basic", p1_for:"Website + booking", p1_price:"000,000", cur:"Toman setup", p1_monthly:"+ 000,000 Toman / month",
+  plans_kicker:"Plans", plans_h:"Build it once, then relax.", plans_sub:"A one-time setup plus a monthly hosting and support fee.", plans_founding:"Founding price for the first 10 clinics", plans_sms:"SMS is billed separately, at cost.",
+  p1_name:"Basic", p1_for:"Website + booking", p1_price:"9,900,000", cur:"Toman setup", p1_monthly:"+ 990,000 Toman / month",
   p1_1:"Bilingual, responsive website", p1_2:"Online booking with national ID", p1_3:"Confirmation and cancel SMS", p1_4:"Booking alerts on Telegram and Bale",
-  p2_name:"Pro", p2_for:"+ online visits and payment", p2_price:"000,000", p2_monthly:"+ 000,000 Toman / month",
+  p2_name:"Pro", p2_for:"+ online visits and payment", p2_price:"14,900,000", p2_monthly:"+ 1,490,000 Toman / month",
   p2_1:"Everything in Basic", p2_2:"Online visits (voice or text)", p2_3:"Card-to-card prepayment", p2_4:"Patient self-cancel + day-off management",
-  p3_name:"Premium", p3_for:"+ AI and custom design", p3_price:"000,000", p3_monthly:"+ 000,000 Toman / month",
+  p3_name:"Premium", p3_for:"+ AI and custom design", p3_price:"24,900,000", p3_monthly:"+ 2,490,000 Toman / month",
   p3_1:"Everything in Pro", p3_2:"AI assistant (Claude)", p3_3:"Custom design and branding", p3_4:"Priority support",
   p_popular:"Most popular", p_choose:"Request this plan", plans_note:"Not sure which plan? Fill the form and we'll advise.",
   form_sub:"Fill the form and we'll contact you within one business day. No commitment.",
