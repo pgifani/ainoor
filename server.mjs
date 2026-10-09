@@ -37,10 +37,12 @@ const TYPES = {
   ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
   ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml",
   ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".webp": "image/webp",
-  ".ico": "image/x-icon", ".woff": "font/woff", ".woff2": "font/woff2",
+  ".ico": "image/x-icon", ".woff": "font/woff", ".woff2": "font/woff2", ".mp4": "video/mp4",
 };
 // Only these are ever served — never server code, configs, or leads.json (PII).
-const PUBLIC_EXT = new Set([".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".woff", ".woff2"]);
+const PUBLIC_EXT = new Set([".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".ico", ".woff", ".woff2", ".mp4"]);
+// Media under /assets/ is cached by browsers for a day; pages stay no-store so edits show up at once.
+const CACHEABLE = new Set([".mp4", ".jpg", ".jpeg", ".png", ".webp", ".svg", ".woff", ".woff2"]);
 
 const json = (res, code, obj) => { res.writeHead(code, { "content-type": "application/json; charset=utf-8" }); res.end(JSON.stringify(obj)); };
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -185,7 +187,9 @@ async function serveStatic(req, res) {
     const s = await stat(full);
     if (!s.isFile()) return notFound();
     const body = await readFile(full);
-    res.writeHead(200, { "content-type": TYPES[extname(full).toLowerCase()], "cache-control": "no-store" });
+    const ext = extname(full).toLowerCase();
+    const cache = CACHEABLE.has(ext) && rel.startsWith("/assets/") ? "public, max-age=86400" : "no-store";
+    res.writeHead(200, { "content-type": TYPES[ext], "cache-control": cache, "content-length": body.length });
     res.end(body);
   } catch { notFound(); }
 }
