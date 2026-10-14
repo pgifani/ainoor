@@ -146,3 +146,10 @@ Fill the `{{…}}` placeholders. Swap تلگرام↔بله and the app name per
 - **Group `/id` silent on Telegram** → disable BotFather privacy mode.
 - **Always Redeploy** in Coolify after changing env; nothing takes effect until then.
 - See the memory note `ainoor-vps-deployment` for the full per-client infra (Coolify, Dockerfile, data volume, Resend, etc.).
+
+## After onboarding — teach the doctor the staff assistant
+If the clinic's site has the conversational **staff assistant** (talk to the bot in text/voice to change
+hours, days off, prices, the site banner, contact numbers and patient-facing answers), send the doctor the
+ready-made Persian guide in **`staff-assistant-guide.fa.md`** (same folder). Customise it first: doctor/clinic
+names, group vs private-chat block, and replace every `⟨نمونه⟩` line with true facts for that clinic.
+Its setup checklist (Group Privacy off, website env vars, `/api/status` check) is at the bottom.
