@@ -18,7 +18,12 @@ lives in a different repo, `pgifani/dr-foroogh-hashemi`). Don't mix client work 
 - `.claude/skills/` — the agency's reusable skills:
   - **clinic-site-launch** — end-to-end launch of a new client site (repo → Coolify → domain →
     SMS/email → bots → verify). Start here for a new doctor.
-  - **clinic-bot-onboarding** — connect a clinic's staff to the Telegram/Bale booking bots.
+  - **clinic-bot-onboarding** — connect a clinic's staff to the Telegram/Bale booking bots
+    (+ `staff-assistant-guide.fa.md`, the ready-to-send Persian guide for doctors).
+  - **clinic-staff-assistant** — the conversational bot: staff change hours, days off, prices, banner,
+    phone/WhatsApp and patient answers by text/voice; setup, troubleshooting, extending, mock-bot testing.
+  - **clinic-voice-agent** — the Persian voice receptionist (web call page that books by voice): per-clinic
+    setup, ElevenLabs/voices/costs, tuning lessons, phone-line options in Iran.
 
 ## Stack & deploy (same pattern as the client sites)
 - **Zero npm dependencies** — Node built-in `http` + `fetch` only. No `package.json`; Coolify must

@@ -44,13 +44,16 @@ volume mounted at **/app/data**.
 |---|---|
 | **Doctor name** (EN) | `index.html` — ~5 spots; plus `CLINIC_INFO` in `server.mjs` |
 | **Doctor name** (FA) | `fa.html` — ~5 spots |
-| **Weekly schedule** | `HOURS` map — **both** `index.html` (~L776) and `fa.html` (~L748). Keep them identical. Format `{ getDay: [startHour, endHour] }`, Sat=6…Sun=0; a missing weekday = closed. `DAYS_AHEAD` = how far ahead to book. |
+| **Weekly schedule (starting hours)** | `DEFAULT_HOURS` in `server.mjs` — the server is the source of truth (`DATA_DIR/schedule.json`; staff later change it from the bot). Also set the same values as the HTML fallback `let HOURS = …` in **both** `index.html` and `fa.html`, and the fallback hours text in the `data-hours` spans. Format `{ getDay: [startHour, endHour] }` (decimal hours OK, 12.5 = 12:30), Sat=6…Sun=0; missing weekday = closed. `DAYS_AHEAD` = booking window. |
 | **Services + highlighted card** | services/bento section in both HTML files |
-| **Chatbot knowledge** | `CLINIC_INFO` string in `server.mjs` (~L102) — hours, services, address, phone, policies. `chatSystem()` (~L106) holds the guardrails; usually leave as-is. |
+| **Chatbot knowledge** | `CLINIC_INFO` in `server.mjs` — doctor, address, booking rules, services. Keep the `{{HOURS}}`, `{{CONTACT}}`, `{{FEES}}` placeholders (filled live from the editable schedule/settings). `chatSystem()` holds the guardrails; usually leave as-is. Extra facts are best taught later by staff via the bot. |
+| **Staff-assistant identity** | `STAFF_SYSTEM` (first line: doctor, specialty, city) and the `draftFacts()` prompt ("pediatric clinic") in `server.mjs` |
+| **Default phone / WhatsApp** | `DEFAULT_SETTINGS` in `server.mjs` (`phone`, `whatsapp`; `CLINIC_WHATSAPP` env also seeds it). Also the fallback text in both HTML files (`[data-contact]` spans/links) and the chatbot `CLINIC` objects. Staff can change them later from the bot |
 | **Colors / branding / photos** | both HTML `<style>` tokens + `brand_assets/`; invoke frontend-design for real design work |
-| **Contact (phone/address/map)** | contact sections in both HTML files |
+| **Contact (address/map)** | contact sections in both HTML files |
 
-Keep EN and FA in sync. The `HOURS` map is client-side only (no server schedule to match).
+Keep EN and FA in sync. Prices, the announcement banner, phone/WhatsApp and weekly hours are **live settings**
+(`/api/config`, `/api/availability`): the HTML values are only the first-paint fallback.
 
 ## Step 3 — Coolify app
 
@@ -125,14 +128,19 @@ One agency account (registered once under the agency's national ID) serves all c
 | `BALE_BOT_TOKEN` + `BALE_STAFF_CHAT_ID` | Bale (Iran default) |
 
 **Online visits + prepayment** (only if offering online visits)
-| `CLINIC_WHATSAPP` | doctor's WhatsApp, e.g. `+98912…` |
-| `CLINIC_CARD` | card number shown for card-to-card prepay |
+| `CLINIC_WHATSAPP` | doctor's WhatsApp, e.g. `+98912…` — only the starting value; staff change it from the bot (`settings.json`) |
+| `CLINIC_CARD` | card number shown for card-to-card prepay — **env only, deliberately not editable from the bot** |
 | `CLINIC_CARD_NAME` | card-holder name |
-| `ONLINE_FEE` | display string, e.g. `۳۰۰٬۰۰۰ تومان` |
+| `ONLINE_FEE` | fallback display string, e.g. `۳۰۰٬۰۰۰ تومان`, until staff set per-type prices in the bot |
 
-**AI chatbot**
-| `ANTHROPIC_API_KEY` | enables real Claude replies (else rule-based fallback) |
+**AI chatbot + staff assistant**
+| `ANTHROPIC_API_KEY` | enables real Claude replies (else rule-based fallback) **and** the staff assistant in the bot |
 | `CHAT_MODEL` | optional; default `claude-haiku-4-5` (fast/cheap). `claude-opus-5-5` for more capability |
+| `ELEVENLABS_API_KEY` | staff **voice notes** in the bot (Scribe STT; key needs Speech-to-Text) |
+| `STAFF_MODEL`, `KNOWLEDGE_MODEL` | optional; default `claude-sonnet-5-5` |
+| `ELEVENLABS_VOICE_ID` | **only** if the customer wants the bot to answer voice with voice — otherwise leave unset |
+
+**Debug only:** `ENABLE_BOOKINGS_DUMP=1` (local `/api/bookings`, loopback only), `BALE_API_BASE` (mock bot API for tests).
 
 **Set by Dockerfile (don't override unless needed):** `PORT=3000`, `DATA_DIR=/app/data`.
 
@@ -144,6 +152,15 @@ Run the **clinic-bot-onboarding** skill: get the staff chat ID (person or shared
 invite-link trick for non-contacts), set the `*_STAFF_CHAT_ID` var, and send the Persian
 instructions. Bale is the reliable default inside Iran.
 
+Then the **staff assistant** (skill **clinic-staff-assistant**): for a Telegram **group** turn Group Privacy off and
+re-add the bot; make sure `ANTHROPIC_API_KEY` + `ELEVENLABS_API_KEY` are set; have staff set the real **prices**
+(«دستیار، قیمت‌ها: حضوری …، آنلاین صوتی …، آنلاین متنی …») and any patient facts; send the doctor
+`../clinic-bot-onboarding/staff-assistant-guide.fa.md` (customised).
+
+## Step 7b — voice receptionist (optional upsell)
+If the customer wants a Persian voice receptionist, run the **clinic-voice-agent** skill (separate repo/app,
+`voice.<domain>`, books through this site's `/api/slots` + strict `/api/book`).
+
 ## Step 8 — go-live verification
 
 After the final Redeploy, check:
@@ -154,12 +171,19 @@ After the final Redeploy, check:
 - [ ] Tap ✅ → confirmation **SMS with the cancel link** arrives; tapping the link cancels and reopens the slot.
 - [ ] Online booking shows the payment panel and requires the tracking code.
 - [ ] Mobile layout is clean (resize 375px, both languages).
-- [ ] Clear any test rows: in Coolify Terminal `rm /app/data/bookings.json` (and `blocks.json`).
+- [ ] **Private data is not public:** `/api/bookings`, `/data/bookings.json`, `/bookings.json`, `/.env`, `/server.mjs` all **404**
+      (the static server only serves page assets; the first clinic leaked bookings this way before the fix).
+- [ ] `GET /api/status` → `staffAssistant`, `voiceNotes`, `staffChatIsGroup` (if group), `groupPrivacyOff` (Telegram group) all `true`.
+- [ ] `GET /api/slots` lists the week with Persian labels; `GET /api/knowledge` returns `hours`/`contact`/`fees`.
+- [ ] In the staff chat: «دستیار، ساعت کاری چیه؟» answers; a price change asks to confirm → «آره» → ✅ + ↩️, and the booking form shows it.
+- [ ] Clear any test rows: in Coolify Terminal `rm /app/data/bookings.json` (and `blocks.json`; also `knowledge.json` /
+      `settings.json` / `schedule.json` only if they hold test values — they normally hold the clinic's real config).
 
 ## Step 9 — handover
 
-- Give the client the **Persian bot instructions** (from clinic-bot-onboarding).
-- Explain how they confirm/decline and manage days off (bot commands / blocked dates).
+- Give the client the **Persian bot instructions** (from clinic-bot-onboarding) **and the staff-assistant guide**
+  (`clinic-bot-onboarding/staff-assistant-guide.fa.md`, customised — replace every `⟨نمونه⟩`).
+- Explain how they confirm/decline, and that they can now just *talk* to the bot for hours, days off, prices, banner and answers.
 - Note what's demo vs. their own (domain, email sender) and the plan to migrate later.
 
 ---
@@ -176,3 +200,7 @@ After the final Redeploy, check:
 - **Every env change requires Redeploy.**
 - Keep `index.html` and `fa.html` **in sync** (schedule, services, name, design).
 - Never commit/print `.env`, bot tokens, API keys, or `bookings.json` (PII).
+- **Coolify's purple "Deploy" = redeploy with the latest commit;** "Restart" re-runs the old code.
+- **The website app and the voice-agent app each need their own env vars** (e.g. `ELEVENLABS_API_KEY` on both; `ELEVENLABS_VOICE_ID` only on the voice agent).
+- **Testing Persian over HTTP from Windows:** Git-Bash `curl` with Persian arguments sends `???` — use a Node script.
+- **The web booking form posts without `strict`** (fire-and-forget), so double-booking from the website is still possible; the voice agent always uses `strict`.
