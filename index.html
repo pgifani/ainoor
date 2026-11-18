@@ -159,6 +159,12 @@ html[lang=en] .band{text-align:left}
   .b3 .w,.b3 .s2,.b3 .s3{opacity:1!important;transform:none!important}
 }
 @media (max-height:560px) and (min-width:721px){.cue{display:none}}
+/* Compact hero (user 2026-11-18, after the one-screen change: still "a blank part on top").
+   The hero is only as tall as its text, right under the nav, on every screen and motion setting. */
+.stage{height:auto!important;min-height:0!important;max-height:none!important;display:block!important;padding:clamp(104px,13vh,140px) 0 clamp(44px,6vh,72px)}
+.b3{position:relative!important;top:auto!important;right:auto!important;left:auto!important;transform:none!important;width:auto!important;max-width:min(1180px,100% - 40px);margin:0 auto!important;padding:0!important}
+.b3 h1{white-space:normal}
+.b3::before{inset:-14% -6%}
 
 /* ---------- sections ---------- */
 section.sec{position:relative;padding:clamp(80px,11vw,150px) 0}
