@@ -175,7 +175,11 @@ async function serveStatic(req, res) {
   const notFound = () => { res.writeHead(404, { "content-type": "text/plain; charset=utf-8" }); res.end("404 Not Found"); };
   let rel;
   try { rel = decodeURIComponent((req.url || "/").split("?")[0]); } catch { res.writeHead(400); return res.end("400"); }
-  if (rel === "/" || rel.endsWith("/")) rel = "/index.html";
+  if (rel.endsWith("/")) rel += "index.html"; // "/" → /index.html, "/templates/x/" → /templates/x/index.html
+  else if (!extname(rel) && /^\/[\w\-/]+$/.test(rel)) {
+    // "/templates" or "/templates/dentistry" → add the slash so the page's relative img/ paths resolve
+    try { if ((await stat(join(ROOT, rel, "index.html"))).isFile()) { res.writeHead(301, { location: rel + "/" }); return res.end(); } } catch {}
+  }
   const full = normalize(join(ROOT, rel));
   const inRoot = full.startsWith(ROOT.replace(/[\\/]$/, "") + sep);
   // When DATA_DIR is a subfolder (Docker: /app/data) block it outright; when it is ROOT (local dev)
@@ -188,7 +192,7 @@ async function serveStatic(req, res) {
     if (!s.isFile()) return notFound();
     const body = await readFile(full);
     const ext = extname(full).toLowerCase();
-    const cache = CACHEABLE.has(ext) && rel.startsWith("/assets/") ? "public, max-age=86400" : "no-store";
+    const cache = CACHEABLE.has(ext) && (rel.startsWith("/assets/") || /^\/templates\/[\w-]+\/img\//.test(rel)) ? "public, max-age=86400" : "no-store";
     res.writeHead(200, { "content-type": TYPES[ext], "cache-control": cache, "content-length": body.length });
     res.end(body);
   } catch { notFound(); }

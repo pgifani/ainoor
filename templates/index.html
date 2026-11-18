@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قالب‌های سایت پزشکی | آینور</title>
+<meta name="description" content="ده قالب آماده‌ی سایت و نوبت‌دهی آنلاین برای پزشکان متخصص؛ یکی را انتخاب کنید تا با اطلاعات مطب شما ساخته شود.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;800&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@600;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Markazi+Text:wght@500;700&family=El+Messiri:wght@500;700&family=Readex+Pro:wght@400;500;700&family=Noto+Kufi+Arabic:wght@600;800&family=Lalezar&family=Noto+Naskh+Arabic:wght@500;700&family=Reem+Kufi:wght@500;700&family=Vazirmatn:wght@400;500;700;900&text=%D8%B4%DA%A9%D9%88%D9%81%D9%87%D9%84%D8%A8%D8%AE%D9%86%D8%AF%DB%8C%D8%B1%D9%85%DA%AF%D8%A7%D8%AA%D9%BE%D8%A2%D8%B3%D8%B2&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#FDF8F3;--panel:#fff;--sand:#F3EBE1;--accent:#FF8A5B;--gold:#FFB84D;--teal:#0E7C7B;--t1:#141A21;--t2:#5A6472;--ink:#0B0F14;--line:rgba(20,26,33,.12);--line-strong:#7A8491;--noor:linear-gradient(90deg,#FFB84D,#FF8A5B);--ease:cubic-bezier(.22,1,.36,1)}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--canvas);color:var(--t1);font:17px/1.85 Vazirmatn,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.skip{position:absolute;inset-inline-start:16px;top:-60px;background:var(--t1);color:#fff;padding:10px 16px;border-radius:10px;z-index:9}.skip:focus{top:12px}
+header{padding:18px 0;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:16px}
+.brand{display:inline-flex;align-items:baseline;gap:10px;text-decoration:none;font-weight:800;font-size:1.4rem}
+.brand i{font-style:normal;font-family:'Instrument Serif',serif;font-weight:400;font-size:1.2rem;color:var(--t2)}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--noor);box-shadow:0 0 14px rgba(255,184,77,.9);align-self:center}
+header nav{margin-inline-start:auto;display:flex;gap:10px;align-items:center}
+header nav a.home{color:var(--t2);text-decoration:none;font-size:.95rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font:600 1rem Vazirmatn,sans-serif;border-radius:999px;padding:12px 22px;border:1px solid transparent;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease)}
+.btn:active{transform:translateY(1px)}
+.btn-noor{background:var(--noor);color:var(--ink);box-shadow:0 8px 24px -12px rgba(255,138,91,.8)}
+.btn-noor:hover{transform:translateY(-2px);box-shadow:0 14px 30px -14px rgba(255,138,91,.95)}
+.btn-ghost{background:#fff;border-color:var(--line-strong);color:var(--t1)}
+.btn-ghost:hover{transform:translateY(-2px)}
+.btn-sm{padding:8px 16px;font-size:.9rem}
+.intro{padding:56px 0 32px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:40px;align-items:end}
+.intro h1{font-weight:800;font-size:clamp(2rem,1.2rem + 3vw,3.3rem);line-height:1.35;margin:0}
+.intro p{margin:0;color:var(--t2);max-width:46ch}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:12px;align-items:baseline;color:var(--t2)}
+.steps li::before{content:counter(s,persian);flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--sand);color:var(--t1);font-weight:800;font-size:.9rem}
+.grid{list-style:none;margin-block:0;padding:24px 0 72px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:28px 24px}
+.tpl{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.shot{display:block;position:relative;background:var(--b);padding:12px 12px 0;text-decoration:none;border-bottom:4px solid var(--p)}
+.shot .bar{display:flex;gap:5px;padding:0 4px 8px}.shot .bar i{width:8px;height:8px;border-radius:50%;background:var(--k);opacity:.25}
+.shot img{width:100%;height:auto;aspect-ratio:16/11;object-fit:cover;object-position:center 20%;border-radius:12px 12px 0 0;transition:transform .5s var(--ease)}
+.shot:hover img{transform:translateY(-4px)}
+.meta{padding:20px 22px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.spec{margin:0;color:var(--teal);font-weight:500;font-size:.92rem}
+.meta h2{margin:0;font-size:2.1rem;line-height:1.3;color:var(--k)}
+.look{margin:0;color:var(--t2);font-size:.95rem}
+.feat{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:2px;font-size:.93rem}
+.feat li{display:flex;gap:8px;align-items:baseline}.feat li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--p);transform:translateY(-2px)}
+.sw{display:flex;gap:6px;margin-top:10px}.sw b{width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:16px}
+.custom{background:var(--sand);border:1px dashed var(--line-strong);border-radius:22px;padding:28px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.custom h2{margin:0;font-size:1.6rem;font-weight:800}.custom p{margin:0;color:var(--t2)}
+.custom .btn{align-self:flex-start;margin-top:8px}
+.note{color:var(--t2);font-size:.9rem;padding-bottom:48px;margin-block:0}
+footer{background:var(--sand);padding:28px 0;color:var(--t2);font-size:.92rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}footer a{text-decoration:none}
+@media (max-width:820px){.intro{grid-template-columns:1fr;padding-top:36px}}
+@media (max-width:420px){header nav a.home{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#list">رفتن به قالب‌ها</a>
+<header><div class="wrap"><a class="brand" href="/" aria-label="آینور، صفحه‌ی اصلی"><span class="dot" aria-hidden="true"></span>آینور<i>ainoor</i></a>
+<nav><a class="home" href="/">صفحه‌ی اصلی</a><a class="btn btn-noor btn-sm" href="/intake">درخواست سرویس</a></nav></div></header>
+<main>
+<section class="wrap intro">
+  <div><h1>قالب سایت مطبتان را انتخاب کنید</h1>
+  <p>ده طرح آماده برای ده تخصص. هر کدام یک سایت کامل یک‌صفحه‌ای با نوبت‌دهی آنلاین است. نمونه را ببینید و قالبی را که می‌پسندید انتخاب کنید؛ ما آن را با نام، عکس‌ها، خدمات و ساعت کاری مطب شما می‌سازیم.</p></div>
+  <ol class="steps"><li>نمونه‌ها را ببینید</li><li>«انتخاب این قالب» را بزنید و فرم اطلاعات مطب را پر کنید</li><li>ما نسخه‌ی اول سایت را می‌سازیم و تغییرات را با هم انجام می‌دهیم</li></ol>
+</section>
+<ul class="wrap grid" id="list">
+<li class="tpl" style="--p:#F2643F;--a:#FFC93C;--b:#F2F9FF;--k:#1E3557">
+  <a class="shot" href="/templates/pediatrics/" aria-label="دیدن نمونه‌ی قالب شکوفه">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/pediatrics/img/hero.webp" alt="" loading="eager" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">کودکان و نوزادان</p>
+    <h2 style="font-family:'Baloo Bhaijaan 2',Vazirmatn,sans-serif;font-weight:800">شکوفه</h2>
+    <p class="look">شاد و گرم؛ آبی آسمانی و نارنجی</p>
+    <ul class="feat"><li>جدول واکسن‌ها بر اساس سن</li><li>نوبت فوری همان روز برای کودک بیمار</li><li>نوبت آنلاین</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#F2643F"></b><b style="background:#FFC93C"></b><b style="background:#F2F9FF"></b><b style="background:#1E3557"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/pediatrics/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=pediatrics">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#0E8784;--a:#7FDCCB;--b:#FFFFFF;--k:#0B3440">
+  <a class="shot" href="/templates/dentistry/" aria-label="دیدن نمونه‌ی قالب لبخند">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/dentistry/img/hero.webp" alt="" loading="eager" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">دندانپزشکی</p>
+    <h2 style="font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:700">لبخند</h2>
+    <p class="look">تمیز و روشن، سفید و فیروزه‌ای</p>
+    <ul class="feat"><li>مقایسه‌ی عکس قبل و بعد</li><li>جدول قیمت خدمات</li><li>بیمه‌های طرف قرارداد</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#0E8784"></b><b style="background:#7FDCCB"></b><b style="background:#FFFFFF"></b><b style="background:#0B3440"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/dentistry/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=dentistry">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#A8466F;--a:#E8C7B8;--b:#FBF3F1;--k:#3A1F33">
+  <a class="shot" href="/templates/gynecology/" aria-label="دیدن نمونه‌ی قالب نیلوفر">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/gynecology/img/hero.webp" alt="" loading="eager" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">زنان و زایمان</p>
+    <h2 style="font-family:'Markazi Text',Vazirmatn,serif;font-weight:700">نیلوفر</h2>
+    <p class="look">آرام و لطیف؛ صورتی ملایم و بادمجانی</p>
+    <ul class="feat"><li>مراحل مراقبت در دوران بارداری</li><li>مشاوره‌ی محرمانه</li><li>نوبت آنلاین</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#A8466F"></b><b style="background:#E8C7B8"></b><b style="background:#FBF3F1"></b><b style="background:#3A1F33"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/gynecology/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=gynecology">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#2B221D;--a:#B48A50;--b:#F6F0EA;--k:#2B221D">
+  <a class="shot" href="/templates/dermatology/" aria-label="دیدن نمونه‌ی قالب مخمل">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/dermatology/img/hero.webp" alt="" loading="lazy" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">پوست، مو و زیبایی</p>
+    <h2 style="font-family:'El Messiri',Vazirmatn,serif;font-weight:600">مخمل</h2>
+    <p class="look">لوکس و آرام؛ قهوه‌ای تیره، کرم و طلایی</p>
+    <ul class="feat"><li>فهرست خدمات با قیمت</li><li>عکس‌های قبل و بعد</li><li>نوبت مشاوره</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#2B221D"></b><b style="background:#B48A50"></b><b style="background:#F6F0EA"></b><b style="background:#2B221D"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/dermatology/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=dermatology">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#0B4DA2;--a:#F2A93B;--b:#F4F8FF;--k:#0A1F44">
+  <a class="shot" href="/templates/ophthalmology/" aria-label="دیدن نمونه‌ی قالب نگاه">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/ophthalmology/img/hero.webp" alt="" loading="lazy" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">چشم‌پزشکی</p>
+    <h2 style="font-family:'Readex Pro',sans-serif;font-weight:500">نگاه</h2>
+    <p class="look">دقیق و حرفه‌ای؛ سرمه‌ای و نارنجی طلایی</p>
+    <ul class="feat"><li>تست ساده: لیزیک برای من مناسب است؟</li><li>معاینه‌های تخصصی</li><li>نوبت آنلاین</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#0B4DA2"></b><b style="background:#F2A93B"></b><b style="background:#F4F8FF"></b><b style="background:#0A1F44"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/ophthalmology/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=ophthalmology">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#C21A30;--a:#0F1E3D;--b:#F5F7FA;--k:#0F1E3D">
+  <a class="shot" href="/templates/cardiology/" aria-label="دیدن نمونه‌ی قالب تپش">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/cardiology/img/hero.webp" alt="" loading="lazy" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">قلب و عروق</p>
+    <h2 style="font-family:'Noto Kufi Arabic',Vazirmatn,sans-serif;font-weight:800">تپش</h2>
+    <p class="look">جدی و مطمئن، سرمه‌ای و قرمز</p>
+    <ul class="feat"><li>آمادگی‌های لازم قبل از هر تست</li><li>علائمی که باید فوراً به اورژانس بروید</li><li>نوبت آنلاین</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#C21A30"></b><b style="background:#0F1E3D"></b><b style="background:#F5F7FA"></b><b style="background:#0F1E3D"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/cardiology/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=cardiology">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#16894C;--a:#FF7A2F;--b:#F1F6F2;--k:#14261C">
+  <a class="shot" href="/templates/orthopedics/" aria-label="دیدن نمونه‌ی قالب پویا">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/orthopedics/img/hero.webp" alt="" loading="lazy" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">ارتوپدی و فیزیوتراپی</p>
+    <h2 style="font-family:Lalezar,Vazirmatn,sans-serif;font-weight:400">پویا</h2>
+    <p class="look">پرانرژی و ورزشی، سبز و نارنجی</p>
+    <ul class="feat"><li>انتخاب محل درد روی تصویر بدن</li><li>درمان در چهار مرحله</li><li>نوبت آنلاین</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#16894C"></b><b style="background:#FF7A2F"></b><b style="background:#F1F6F2"></b><b style="background:#14261C"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/orthopedics/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=orthopedics">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#3E6B57;--a:#B8A6D9;--b:#EEF2EE;--k:#23362E">
+  <a class="shot" href="/templates/psychology/" aria-label="دیدن نمونه‌ی قالب آرامش">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/psychology/img/hero.webp" alt="" loading="lazy" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">روانشناسی و مشاوره</p>
+    <h2 style="font-family:'Noto Naskh Arabic',Vazirmatn,serif;font-weight:700">آرامش</h2>
+    <p class="look">آرام و دلنشین؛ سبز ملایم و یاسی</p>
+    <ul class="feat"><li>انواع جلسه (حضوری، آنلاین، زوج)</li><li>جلسه‌ی اول چطور است؟</li><li>شماره‌های کمک فوری</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#3E6B57"></b><b style="background:#B8A6D9"></b><b style="background:#EEF2EE"></b><b style="background:#23362E"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/psychology/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=psychology">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#E39A0B;--a:#1F8F82;--b:#FFF8EC;--k:#3B2A14">
+  <a class="shot" href="/templates/ent/" aria-label="دیدن نمونه‌ی قالب آوا">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/ent/img/hero.webp" alt="" loading="lazy" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">گوش، حلق و بینی</p>
+    <h2 style="font-family:'Reem Kufi',Vazirmatn,sans-serif;font-weight:700">آوا</h2>
+    <p class="look">گرم و روشن؛ زرد طلایی و سبزآبی</p>
+    <ul class="feat"><li>سه بخش گوش، حلق و بینی</li><li>شنوایی‌سنجی در مطب</li><li>نوبت آنلاین</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#E39A0B"></b><b style="background:#1F8F82"></b><b style="background:#FFF8EC"></b><b style="background:#3B2A14"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/ent/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=ent">انتخاب این قالب</a></div>
+  </div></li>
+<li class="tpl" style="--p:#4F8A16;--a:#FF8C42;--b:#FBFFF4;--k:#213516">
+  <a class="shot" href="/templates/nutrition/" aria-label="دیدن نمونه‌ی قالب سبزینه">
+    <span class="bar" aria-hidden="true"><i></i><i></i><i></i></span>
+    <img src="/templates/nutrition/img/hero.webp" alt="" loading="lazy" width="800" height="1000">
+  </a>
+  <div class="meta">
+    <p class="spec">تغذیه و رژیم‌درمانی</p>
+    <h2 style="font-family:Vazirmatn,sans-serif;font-weight:900">سبزینه</h2>
+    <p class="look">شاداب؛ سبز روشن و نارنجی</p>
+    <ul class="feat"><li>محاسبه‌ی BMI</li><li>بسته‌های رژیم غذایی</li><li>مشاوره‌ی آنلاین</li></ul>
+    <span class="sw" aria-hidden="true"><b style="background:#4F8A16"></b><b style="background:#FF8C42"></b><b style="background:#FBFFF4"></b><b style="background:#213516"></b></span>
+    <div class="act"><a class="btn btn-ghost btn-sm" href="/templates/nutrition/">دیدن نمونه</a><a class="btn btn-noor btn-sm" href="/intake?template=nutrition">انتخاب این قالب</a></div>
+  </div></li>
+<li class="custom"><h2>طرح اختصاصی</h2><p>هیچ‌کدام را نپسندیدید، یا لوگو و رنگ‌های خودتان را دارید؟ یک طرح کاملاً جدید برایتان می‌سازیم.</p><a class="btn btn-ghost btn-sm" href="/intake?template=custom">درخواست طرح اختصاصی</a></li>
+</ul>
+<p class="wrap note">رنگ، فونت و بخش‌های هر قالب را می‌شود تغییر داد. نام پزشکان، شماره‌ها و آدرس‌ها در نمونه‌ها واقعی نیستند و عکس‌ها با هوش مصنوعی ساخته شده‌اند.</p>
+</main>
+<footer><div class="wrap"><span>© آینور، سایت و نوبت‌دهی هوشمند برای پزشکان</span><a href="/">ainoor.io</a></div></footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "pediatrics": {
+    "hero": "Photorealistic portrait photo of a warm, smiling Iranian female pediatrician in her late thirties wearing a light blue headscarf and white coat with a stethoscope, gently holding a toy stethoscope to a laughing toddler sitting on the mother's lap (mother partly out of frame), bright cheerful pediatric clinic with soft sky-blue walls and coral and sunflower-yellow accents, natural window light, shallow depth of field, editorial healthcare photography, no text, no logos",
+    "clinic": "Photorealistic wide photo of a modern, colorful pediatric examination room in an Iranian clinic, small exam bed with a sky-blue cover, playful wall decals of clouds and hot-air balloons, coral and sunflower-yellow cabinets, toys in a basket, height chart on the wall, bright daylight, clean and welcoming, no people, no text, no logos",
+    "detail": "Photorealistic photo of a cozy kids' play corner in a clinic waiting room: low wooden table with crayons and picture books, soft rug, small colorful chairs, sky-blue and coral palette, warm daylight, inviting, no people, no text, no logos"
+  },
+  "dentistry": {
+    "hero": "Photorealistic portrait of a confident, friendly Iranian male dentist in his early forties with a neat short beard, wearing teal scrubs, standing with arms relaxed beside a modern white dental chair, bright minimalist dental clinic with white and teal tones, large window daylight, clean editorial healthcare photography, shallow depth of field, no text, no logos",
+    "clinic": "Photorealistic wide photo of a bright, ultra-clean modern dental treatment room: white dental unit chair, overhead LED light, teal accent wall, glass cabinets, large monitor showing a panoramic x-ray silhouette (abstract, unreadable), daylight, minimalist, no people, no text, no logos",
+    "detail": "Photorealistic close-up of neatly arranged sterile dental instruments on a white tray with a teal napkin, dental mirror reflecting soft light, clean clinical aesthetic, shallow depth of field, no text, no logos"
+  },
+  "gynecology": {
+    "hero": "Photorealistic portrait of a calm, kind Iranian female gynecologist in her mid forties wearing a soft blush-pink headscarf and a white coat, sitting in a warm, softly lit consultation room with plants and linen curtains, gentle reassuring smile, muted rose and plum tones, natural window light, editorial healthcare photography, no text, no logos",
+    "clinic": "Photorealistic wide photo of a cozy, elegant gynecology consultation room: two soft armchairs facing a light wooden desk, blush and sand-colored walls, linen curtains, a green plant, framed abstract botanical print, warm afternoon light, calm and private atmosphere, no people, no text, no logos",
+    "detail": "Photorealistic photo of a modern ultrasound machine beside an exam bed with a soft blush blanket in a dimly lit, calming clinic room, warm lamp glow, gentle and reassuring mood, no people, no readable screen text, no logos"
+  },
+  "dermatology": {
+    "hero": "Photorealistic elegant portrait of a poised Iranian female dermatologist in her late thirties wearing a cream silk headscarf and a tailored white coat, standing in a luxurious minimalist aesthetic clinic with warm travertine walls, soft golden side light, espresso brown and gold accents, magazine-quality beauty-editorial lighting, subject on the left third of the frame with calm space on the right, no text, no logos",
+    "clinic": "Photorealistic wide photo of a luxurious dermatology treatment room: cream leather treatment bed, travertine and walnut wood finishes, brass details, soft indirect warm lighting, a vase with dried pampas grass, serene spa-like clinical atmosphere, no people, no text, no logos",
+    "detail": "Photorealistic still life of premium unbranded skincare bottles and a glass serum dropper on a cream marble surface with soft golden light and gentle shadows, luxurious minimal aesthetic, no text, no logos"
+  },
+  "ophthalmology": {
+    "hero": "Photorealistic portrait of a focused, approachable Iranian male ophthalmologist in his fifties with salt-and-pepper hair and glasses, white coat, seated beside a slit lamp examination microscope in a modern eye clinic, cool deep-blue tones with a warm amber accent light, centered composition suitable for a circular crop, crisp clinical editorial photography, no text, no logos",
+    "clinic": "Photorealistic wide photo of a high-tech ophthalmology examination room: slit lamp, autorefractor and corneal topography machines, examination chair, deep blue accent wall, subtle amber lighting strip, spotless and precise, no people, no readable text, no logos",
+    "detail": "Photorealistic close-up of an ophthalmic slit lamp microscope eyepieces and chin rest with dramatic blue and amber lighting, precise clinical detail, shallow depth of field, no text, no logos"
+  },
+  "cardiology": {
+    "hero": "Photorealistic portrait of a trustworthy, experienced Iranian male cardiologist in his late fifties with grey hair and a calm expression, white coat over a navy shirt, stethoscope around his neck, standing in a modern cardiology clinic with a deep navy wall, subtle crimson accent, soft directional light, serious yet warm editorial healthcare photography, vertical composition, no text, no logos",
+    "clinic": "Photorealistic wide photo of a modern echocardiography room: ultrasound machine beside an exam bed, ECG monitor, navy and white interior with a subtle crimson accent stripe, dimmed professional lighting, spotless, no people, no readable text, no logos",
+    "detail": "Photorealistic close-up of a stethoscope resting beside an ECG monitor showing an abstract green heartbeat line, navy background, crisp clinical detail, shallow depth of field, no readable text, no logos"
+  },
+  "orthopedics": {
+    "hero": "Photorealistic action-portrait of an energetic Iranian male sports-medicine orthopedic doctor in his late thirties wearing a green polo shirt with a stethoscope, guiding a young athlete through a knee rehabilitation exercise on a training mat in a bright modern physiotherapy gym, green and orange accents, dynamic natural light, vertical composition, sporty editorial photography, no text, no logos",
+    "clinic": "Photorealistic wide photo of a modern physiotherapy and sports-rehab gym: treatment tables, resistance bands, balance balls, parallel bars, green rubber floor and orange accent wall, large windows with daylight, energetic and clean, no people, no text, no logos",
+    "detail": "Photorealistic close-up of a physiotherapist's hands guiding a patient's knee exercise with an orange resistance band on a green mat, motion and care, shallow depth of field, no text, no logos"
+  },
+  "psychology": {
+    "hero": "Photorealistic soft portrait of a gentle, empathetic Iranian female clinical psychologist in her thirties wearing a sage-green headscarf and a cream knit cardigan, warm attentive smile, seated in a calm therapy room with plants and soft natural light, muted sage and lavender tones, centered head-and-shoulders composition suitable for a circular crop, no text, no logos",
+    "clinic": "Photorealistic wide photo of a calm, cozy therapy room: two comfortable armchairs angled toward each other, small side table with a box of tissues and a glass of water, sage-green walls, lavender cushion, large leafy plant, linen curtains with soft daylight, quiet and safe atmosphere, no people, no text, no logos",
+    "detail": "Photorealistic still life of a cup of tea and an open notebook with a pen on a wooden windowsill beside a small plant, soft morning light, sage and lavender tones, peaceful mood, no readable text, no logos"
+  },
+  "ent": {
+    "hero": "Photorealistic portrait of a friendly, attentive Iranian male ENT specialist in his forties with a head mirror pushed up on his forehead and an otoscope in hand, white coat, warm amber-lit modern ENT clinic with teal accents, soft natural light, approachable expression, editorial healthcare photography, no text, no logos",
+    "clinic": "Photorealistic wide photo of a modern ENT examination room: ENT treatment chair, endoscopy tower, otoscope station, warm amber wall with teal cabinets, sound-proof audiometry booth window in the background, clean and bright, no people, no readable text, no logos",
+    "detail": "Photorealistic close-up of an otoscope and a slim nasal endoscope on a clean amber-toned tray with a teal cloth, soft warm light, precise clinical detail, shallow depth of field, no text, no logos"
+  },
+  "nutrition": {
+    "hero": "Photorealistic bright portrait of a cheerful Iranian female nutritionist in her thirties wearing a lime-green headscarf and a white coat, standing at a light wooden counter with colorful bowls of fresh vegetables, fruits, herbs and Persian bread, fresh green and tangerine accents, airy daylight, lifestyle-editorial photography, no text, no logos",
+    "clinic": "Photorealistic wide photo of a bright nutrition consultation room: light wooden desk, body composition analyzer scale, bowl of fresh fruit, lime-green accent wall with a large plant, tangerine chairs, airy daylight, friendly and fresh, no people, no text, no logos",
+    "detail": "Photorealistic overhead photo of colorful healthy bowls with fresh salad, lentils, pomegranate seeds, herbs, yogurt and citrus on a light wooden table, fresh green and orange palette, natural daylight, no text, no logos"
+  }
+}

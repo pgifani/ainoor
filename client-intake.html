@@ -115,6 +115,25 @@
 
   .note{ font-size:12px; color:var(--ink-soft); margin-top:6px; }
 
+  /* template picker */
+  .sec-sub a{ color:var(--teal); font-weight:700; }
+  .tpl-pick{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:10px; }
+  .tpl-opt{ position:relative; display:flex; flex-direction:column; border:1.5px solid #DFE3E9; border-radius:14px; overflow:hidden; background:#fff; cursor:pointer; transition:border-color .15s, box-shadow .15s; }
+  .tpl-opt input{ position:absolute; opacity:0; inset:0; margin:0; cursor:pointer; }
+  .tpl-opt .th{ display:block; position:relative; overflow:hidden; aspect-ratio:3/2; background:var(--tb,#eee); border-bottom:3px solid var(--tp,#ccc); }
+  .tpl-opt .th img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; }
+  .tpl-opt .tx{ padding:8px 10px 10px; display:flex; flex-direction:column; gap:1px; }
+  .tpl-opt b{ font-size:14px; }
+  .tpl-opt small{ font-size:12px; color:var(--ink-soft); }
+  .tpl-opt a{ position:relative; z-index:1; font-size:12px; color:var(--teal); font-weight:700; margin-top:4px; align-self:flex-start; }
+  .tpl-opt.custom .th{ display:grid; place-items:center; background:var(--bg,#F7F8FA); border-bottom-color:#DFE3E9; font-size:26px; color:var(--ink-soft); }
+  .tpl-opt:hover{ border-color:var(--ink-soft); }
+  .tpl-opt:has(input:checked){ border-color:var(--noor-deep); box-shadow:0 0 0 3px rgba(255,138,91,.25); }
+  .tpl-opt:has(input:checked) b::after{ content:" ✓"; color:var(--noor-deep); }
+  .tpl-opt:has(input:focus-visible){ outline:2px solid var(--noor-deep); outline-offset:2px; }
+  @media (max-width:640px){ .tpl-pick{ grid-template-columns:1fr 1fr; } }
+  @media print{ .tpl-pick{ display:none; } }
+
   /* action bar */
   .actionbar{
     position:fixed; inset-inline:0; bottom:0; z-index:30;
@@ -166,9 +185,18 @@
     </div>
   </header>
 
-  <!-- 1. Doctor -->
+  <!-- 1. Template -->
+  <section class="card" id="sec-template" data-section="قالب سایت">
+    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M9 9v11"/></svg></div><h2>۱. قالب سایت</h2></div>
+    <div class="sec-sub">یکی از قالب‌های آماده را انتخاب کنید تا سایت شما بر اساس آن ساخته شود. رنگ‌ها و بخش‌ها را بعداً هم می‌شود تغییر داد. <a href="/templates/" target="_blank" rel="noopener">همهٔ نمونه‌ها را ببینید</a></div>
+    <input type="hidden" data-key="template" data-label="قالب انتخابی" id="tplValue">
+    <div class="tpl-pick" id="tplPick" role="radiogroup" aria-label="قالب سایت"></div>
+    <p class="note" id="tplNote" aria-live="polite"></p>
+  </section>
+
+  <!-- 2. Doctor -->
   <section class="card" id="sec-doctor" data-section="اطلاعات پزشک">
-    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5a4 4 0 0 0 8 0V3M5 3h2M13 3h2M10 16.5v1a4 4 0 0 0 8 0V15"/><circle cx="18" cy="13" r="2"/></svg></div><h2>۱. اطلاعات پزشک</h2></div>
+    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5a4 4 0 0 0 8 0V3M5 3h2M13 3h2M10 16.5v1a4 4 0 0 0 8 0V15"/><circle cx="18" cy="13" r="2"/></svg></div><h2>۲. اطلاعات پزشک</h2></div>
     <div class="sec-sub">نام و معرفی پزشک که در صفحهٔ اصلی نمایش داده می‌شود.</div>
     <div class="grid2">
       <label class="fld"><span class="lbl">نام و نام خانوادگی (فارسی)<span class="req">*</span></span>
@@ -184,9 +212,9 @@
     </div>
   </section>
 
-  <!-- 2. Contact -->
+  <!-- 3. Contact -->
   <section class="card" id="sec-contact" data-section="اطلاعات تماس">
-    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h2>۲. اطلاعات تماس</h2></div>
+    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h2>۳. اطلاعات تماس</h2></div>
     <div class="sec-sub">این موارد در بخش تماس و پاورقی سایت می‌آید.</div>
     <div class="grid2">
       <label class="fld"><span class="lbl">تلفن مطب<span class="req">*</span></span>
@@ -204,9 +232,9 @@
     </div>
   </section>
 
-  <!-- 3. Services -->
+  <!-- 4. Services -->
   <section class="card" id="sec-services" data-section="خدمات">
-    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V5H9v-.5Z"/><path d="M8.5 10h7M8.5 14h7M8.5 18h4"/></svg></div><h2>۳. خدمات</h2></div>
+    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V5H9v-.5Z"/><path d="M8.5 10h7M8.5 14h7M8.5 18h4"/></svg></div><h2>۴. خدمات</h2></div>
     <div class="sec-sub">خدماتی که در بخش «خدمات» سایت معرفی می‌شوند.</div>
     <div class="grid2">
       <label class="fld full"><span class="lbl">فهرست خدمات<span class="req">*</span></span>
@@ -219,17 +247,17 @@
     </div>
   </section>
 
-  <!-- 4. Schedule -->
+  <!-- 5. Schedule -->
   <section class="card" id="sec-schedule" data-section="برنامه هفتگی">
-    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></div><h2>۴. برنامهٔ هفتگی مطب</h2></div>
+    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg></div><h2>۵. برنامهٔ هفتگی مطب</h2></div>
     <div class="sec-sub">برای هر روز ساعت شروع و پایان را وارد کنید؛ روزهای تعطیل را تیک بزنید. (ساعت ۲۴ساعته)</div>
     <div id="schedule"></div>
     <div class="note">مثال: شنبه ۱۲:۰۰ تا ۱۶:۰۰ — پنجشنبه تعطیل.</div>
   </section>
 
-  <!-- 5. Booking -->
+  <!-- 6. Booking -->
   <section class="card" id="sec-booking" data-section="تنظیمات نوبت‌دهی">
-    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><h2>۵. تنظیمات نوبت‌دهی</h2></div>
+    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></div><h2>۶. تنظیمات نوبت‌دهی</h2></div>
     <div class="grid2">
       <label class="fld"><span class="lbl">مدت هر نوبت (دقیقه)</span>
         <input class="ctl" type="number" min="5" step="5" data-key="slot_minutes" data-label="مدت هر نوبت" value="15" dir="ltr"></label>
@@ -238,9 +266,9 @@
     </div>
   </section>
 
-  <!-- 6. Online visits -->
+  <!-- 7. Online visits -->
   <section class="card" id="sec-online" data-section="ویزیت آنلاین">
-    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2.5"/><path d="M8 20.5h8M12 17.5v3"/></svg></div><h2>۶. ویزیت آنلاین</h2></div>
+    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="13" rx="2.5"/><path d="M8 20.5h8M12 17.5v3"/></svg></div><h2>۷. ویزیت آنلاین</h2></div>
     <div class="sec-sub">ویزیت آنلاین از طریق واتساپ انجام می‌شود و پیش‌پرداخت کارت‌به‌کارت دارد.</div>
     <div class="grid2">
       <label class="fld"><span class="lbl">آیا ویزیت آنلاین ارائه می‌دهید؟</span>
@@ -264,9 +292,9 @@
     </div>
   </section>
 
-  <!-- 7. Notifications -->
+  <!-- 8. Notifications -->
   <section class="card" id="sec-notify" data-section="اطلاع‌رسانی نوبت‌ها">
-    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><h2>۷. اطلاع‌رسانی نوبت‌ها</h2></div>
+    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6Z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><h2>۸. اطلاع‌رسانی نوبت‌ها</h2></div>
     <div class="sec-sub">نوبت‌های جدید با دکمهٔ تأیید/رد به پیام‌رسان شما فرستاده می‌شوند.</div>
     <div class="grid2">
       <label class="fld"><span class="lbl">نوبت‌ها به چه کسی اطلاع داده شود؟</span>
@@ -286,9 +314,9 @@
     </div>
   </section>
 
-  <!-- 8. Domain & brand -->
+  <!-- 9. Domain & brand -->
   <section class="card" id="sec-brand" data-section="دامنه و برند">
-    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.9-.9 1.9-2 0-1-.8-1.7-.8-2.6 0-.7.5-1.2 1.2-1.2H16a5 5 0 0 0 5-5c0-4-4-7-9-7Z"/><circle cx="7.5" cy="12.5" r="1"/><circle cx="10" cy="8.5" r="1"/><circle cx="15" cy="8.5" r="1"/></svg></div><h2>۸. دامنه و برند</h2></div>
+    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.9-.9 1.9-2 0-1-.8-1.7-.8-2.6 0-.7.5-1.2 1.2-1.2H16a5 5 0 0 0 5-5c0-4-4-7-9-7Z"/><circle cx="7.5" cy="12.5" r="1"/><circle cx="10" cy="8.5" r="1"/><circle cx="15" cy="8.5" r="1"/></svg></div><h2>۹. دامنه و برند</h2></div>
     <div class="grid2">
       <label class="fld"><span class="lbl">آیا دامنه (آدرس اینترنتی) دارید؟</span>
         <select class="ctl" data-key="has_domain" data-label="وضعیت دامنه">
@@ -313,17 +341,17 @@
     </div>
   </section>
 
-  <!-- 9. Chatbot -->
+  <!-- 10. Chatbot -->
   <section class="card" id="sec-chatbot" data-section="دستیار هوشمند (چت‌بات)">
-    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.3V16.5H4A1.5 1.5 0 0 1 2.5 15V7A1.5 1.5 0 0 1 4 5.5Z"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1" fill="currentColor" stroke="none"/></svg></div><h2>۹. دستیار هوشمند</h2></div>
+    <div class="sec-head"><div class="sec-ico noor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5H9l-4 3.3V16.5H4A1.5 1.5 0 0 1 2.5 15V7A1.5 1.5 0 0 1 4 5.5Z"/><circle cx="9" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="11" r="1" fill="currentColor" stroke="none"/></svg></div><h2>۱۰. دستیار هوشمند</h2></div>
     <div class="sec-sub">سایت یک چت‌بات هوشمند دارد که به سؤال بیماران پاسخ می‌دهد (بدون توصیهٔ پزشکی).</div>
     <label class="fld"><span class="lbl">نکاتی که دستیار باید بداند</span>
       <textarea class="ctl" data-key="chatbot_facts" data-label="دانسته‌های چت‌بات" placeholder="مثلاً: کدام بیمه‌ها پذیرفته می‌شود؟ بیمار چه چیزهایی همراه بیاورد؟ سیاست لغو نوبت؟ نکات قیمت؟ پارکینگ؟"></textarea></label>
   </section>
 
-  <!-- 10. Other -->
+  <!-- 11. Other -->
   <section class="card" id="sec-other" data-section="ملاحظات دیگر">
-    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3Z"/><path d="M13.5 6.5l3 3"/></svg></div><h2>۱۰. ملاحظات دیگر</h2></div>
+    <div class="sec-head"><div class="sec-ico teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="ic" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L18.5 9.5a2.1 2.1 0 0 0-3-3L5 17v3Z"/><path d="M13.5 6.5l3 3"/></svg></div><h2>۱۱. ملاحظات دیگر</h2></div>
     <label class="fld"><span class="lbl">هر توضیح، درخواست یا سلیقهٔ دیگری</span>
       <textarea class="ctl" data-key="notes" data-label="ملاحظات" placeholder="هر چیزی که فکر می‌کنید باید بدانیم…"></textarea></label>
   </section>
@@ -510,7 +538,43 @@
       r.querySelector('[data-role=to]').value="";
     });
     window.scrollTo({ top:0, behavior:"smooth" });
+    if(window.syncTemplatePick) window.syncTemplatePick();
   };
+})();
+</script>
+<script src="/templates/cards.js"></script>
+<script>
+/* Template picker: radio cards → the hidden data-key="template" field (saved, restored, emailed like any field).
+   Pre-selects ?template=<slug> from the gallery / demo pages. */
+(function(){
+  var list = window.AINOOR_TEMPLATES || [], box = document.getElementById("tplPick"), field = document.getElementById("tplValue"), note = document.getElementById("tplNote");
+  if(!box || !field) return;
+  var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+  var CUSTOM = "طرح اختصاصی (طراحی جدید)";
+  function valueOf(t){ return t ? "«" + t.name + "»، " + t.specialty + " (ainoor.io/templates/" + t.slug + "/)" : CUSTOM; }
+  function slugOf(v){ if(!v) return ""; if(v === CUSTOM) return "custom"; var m = v.match(/templates\/([\w-]+)\//); return m ? m[1] : ""; }
+  box.innerHTML = list.map(function(t){
+    return '<label class="tpl-opt" style="--tp:'+t.colors[0]+';--tb:'+t.colors[2]+'"><input type="radio" name="tpl" value="'+t.slug+'">' +
+      '<span class="th"><img src="'+esc(t.image)+'" alt="" loading="lazy"></span>' +
+      '<span class="tx"><b>'+esc(t.name)+'</b><small>'+esc(t.specialty)+'</small><a href="/templates/'+t.slug+'/" target="_blank" rel="noopener">دیدن نمونه</a></span></label>';
+  }).join("") + '<label class="tpl-opt custom"><input type="radio" name="tpl" value="custom"><span class="th" aria-hidden="true">✎</span><span class="tx"><b>طرح اختصاصی</b><small>طرح جدید با لوگو و رنگ‌های خودتان</small></span></label>';
+  function find(slug){ for(var i=0;i<list.length;i++) if(list[i].slug === slug) return list[i]; return null; }
+  function show(slug){
+    box.querySelectorAll('input[name=tpl]').forEach(function(r){ r.checked = r.value === slug; });
+    var t = find(slug);
+    note.textContent = slug ? "انتخاب شما: " + (t ? "قالب «" + t.name + "»، " + t.specialty : "طرح اختصاصی") : "";
+  }
+  function pick(slug, persist){
+    var t = find(slug);
+    if(!t && slug !== "custom") return;
+    field.value = valueOf(t);
+    show(slug);
+    if(persist) field.dispatchEvent(new Event("input", { bubbles:true })); // triggers the form's autosave
+  }
+  box.addEventListener("change", function(e){ if(e.target.name === "tpl") pick(e.target.value, true); });
+  window.syncTemplatePick = function(){ show(slugOf(field.value)); };
+  var q = (new URLSearchParams(location.search).get("template") || "").toLowerCase();
+  if(q && (find(q) || q === "custom")) pick(q, true); else window.syncTemplatePick();
 })();
 </script>
 </body>
