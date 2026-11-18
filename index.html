@@ -139,6 +139,14 @@ html[lang=en] .band{text-align:left}
 @keyframes bob{50%{transform:translateY(4px)}}
 .cue.gone{opacity:0}
 
+/* ---------- one-screen hero everywhere (user 2026-11-18: no long empty scroll at the top).
+   The scrub video is off; desktop shows its final frame + headline at once. Mobile rules below still apply. ---------- */
+.hero{height:auto}
+.stage{position:relative;height:100vh;height:100svh;min-height:560px;max-height:980px;background:#EEF3EC url('assets/hero-ending.jpg') 30% 50%/cover no-repeat}
+.stage video,.poster,.duo,.cue{display:none!important}
+.b3{opacity:1!important;--k:1!important}
+.b3 .w,.b3 .s2,.b3 .s3{opacity:1!important;transform:none!important}
+
 /* ---------- static hero (5 gates, identical strings in JS) ---------- */
 @media (max-width: 720px), (orientation: portrait) and (max-width: 1024px), (orientation: portrait) and (pointer: coarse), (orientation: landscape) and (pointer: coarse) and (max-height: 560px), (prefers-reduced-motion: reduce){
   .hero{height:auto}
@@ -938,7 +946,8 @@ function disableScrub(){
   if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
   bands.forEach(b => { b.el.style.removeProperty('opacity'); b.el.style.removeProperty('--k'); b.el.style.visibility = ''; b.el.style.pointerEvents = ''; });
 }
-function applyHeroMode(){ if (GATES.some(q => matchMedia(q).matches)) disableScrub(); else enableScrub(); }
+// Scroll-scrub hero switched off (user 2026-11-18): always the static one-screen hero, video never loads.
+function applyHeroMode(){ disableScrub(); if (!RM.matches) unpinFinalStates(); }
 const MQLS = GATES.map(q => matchMedia(q));
 MQLS.forEach(m => m.addEventListener('change', applyHeroMode));
 
